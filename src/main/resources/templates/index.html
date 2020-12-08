@@ -1,0 +1,83 @@
+{{>header}}
+
+	<!-- Page content -->
+	<div class="page-content">
+
+		<!-- Main sidebar -->
+		{{>slider}}
+		<!-- /main sidebar -->
+
+
+		<!-- Main content -->
+		<div class="content-wrapper">
+
+			<!-- Page header -->
+			{{>header2}}
+			<!-- /page header -->
+
+
+			<!-- Content area -->
+			<div class="content">
+
+
+				<!-- Basic table -->
+				<div class="card">
+					<div class="card-header header-elements-inline">
+						<h5 class="card-title">사용자 정보</h5>
+						<div class="header-elements">
+							<div class="list-icons">
+		                		<a class="list-icons-item" data-action="collapse"></a>
+		                		<a class="list-icons-item" data-action="reload"></a>
+		                		<a class="list-icons-item" data-action="remove"></a>
+		                	</div>
+	                	</div>
+					</div>			
+					<div class="card-body d-sm-flex align-items-sm-center justify-content-sm-between flex-sm-wrap">
+						<div class="d-flex align-items-center mb-12 mb-sm-0" >
+							<input type="text" class="form-control" id="search" placeholder="고객 이름을 입력하세요!">
+						</div>
+						<div>
+							<a href="#" class="btn bg-indigo-300"><i class="icon-statistics mr-2"></i> 찾기</a>
+						</div>
+					</div>
+					<div class="table-responsive">
+						<table class="table" id="godsr">
+							<thead>
+								<tr>
+									<th>고객 번호</th>
+									<th>고객 이름</th>
+									<th>고객 ID</th>
+									<th>고객 전화번호</th>
+								</tr>
+							</thead>
+							<tbody>
+							{{#accountList}}
+								<tr>
+									<td>{{id}}</td>
+									<td>{{username}}</td>
+									<td>{{phone}}</td>
+									<td>{{email}}</td>
+								</tr>
+							{{/accountList}}
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<!-- /basic table -->
+
+			</div>
+			<!-- /content area -->
+
+
+			<!-- Footer -->
+			{{>footer}}
+			<!-- /footer -->
+
+		</div>
+		<!-- /main content -->
+
+	</div>
+	<!-- /page content -->
+
+</body>
+</html>
