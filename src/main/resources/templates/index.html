@@ -44,21 +44,48 @@
 							{{#accountList}}
 								<div class="col-xl-4 col-sm-6">
 						<div class="card">
+
 							
 
 					    	<div id="{{id}}" class="card-body text-center" onclick="card_click(this);">
 					    		<h6 class="font-weight-semibold mb-0">{{username}}</h6>
 					    		<span class="d-block text-muted">{{id}}</span>
-					    		<span class="d-block text-muted">{{phone}}</span>
 					    		<span class="d-block text-muted">{{email}}</span>
+					    		<span class="d-block text-muted">{{phone}}</span>
 					    	</div>
 				    	</div>
 					</div>
 							{{/accountList}}
 					</div>
 				</div>
+				
 				<!-- /basic table -->
+				<div id="myModal" class="modal fade" tabindex="-1">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title">유저아이디</h5>
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+							</div>
 
+							<div class="modal-body">
+								<h6 class="font-weight-semibold">사용자 정보</h6>
+								<p>전화번호 : </p>
+
+								<hr>
+
+								<h6 class="font-weight-semibold">유저 이름</h6>
+								<p>Email : </p>
+							</div>
+
+							<div class="modal-footer">
+								<button type="button" class="btn btn-link" data-dismiss="modal">닫기</button>
+								<button type="button" class="btn bg-primary">저장 및 변경</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- modal -->
 			</div>
 			<!-- /content area -->
 
