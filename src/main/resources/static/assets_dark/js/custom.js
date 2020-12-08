@@ -6,16 +6,13 @@
  *
  * ---------------------------------------------------------------------------- */
 
-
-function changeTheme () {
+function changeTheme() {
 	
-	if (document.getElementById('theme').href == "assets/css/bootsrap_limitless.min.css") {
-		document.getElementById('theme').href = "assets_dark/css/bootstrap_limitless.min.css";
+	if (document.getElementById('theme').href == "assets/css/bootsrap.min.css") {
+		document.getElementById('theme').href = "assets_dark/css/bootstrap.min.css";
 	} else {
-		document.getElementById('theme').href = "assets/css/bootstrap_limitless.min.css";
+		document.getElementById('theme').href = "assets/css/bootstrap.min.css";
 	}
-	
-	
 	
 	var button = document.getElementById("switch");
 	
