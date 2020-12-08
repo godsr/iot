@@ -1,0 +1,125 @@
+{{>header}}
+
+	<!-- Page content -->
+	<div class="page-content">
+
+		<!-- Main sidebar -->
+		{{>slider}}
+		<!-- /main sidebar -->
+
+
+		<!-- Main content -->
+		<div class="content-wrapper">
+
+			<!-- Page header -->
+			{{>header2}}
+			<!-- /page header -->
+
+
+			<!-- Content area -->
+			<div class="content">
+
+
+				<!-- Basic table -->
+				<div class="card">
+					<div class="card-header header-elements-inline">
+						<h5 class="card-title">사용자 정보</h5>
+						<div class="header-elements">
+							<div class="list-icons">
+		                		<a class="list-icons-item" data-action="collapse"></a>
+		                		<a class="list-icons-item" data-action="reload"></a>
+		                		<a class="list-icons-item" data-action="remove"></a>
+		                	</div>
+	                	</div>
+					</div>			
+					<div class="card-body d-sm-flex align-items-sm-center justify-content-sm-between">
+						<div class="col-md- 10" >
+							<input type="text" class="form-control" id="search" placeholder="고객 이름을 입력하세요!">
+						</div>
+						<div>
+							<a href="#" class="btn bg-indigo-300"><i class="icon-statistics mr-2"></i> 찾기</a>
+						</div>
+					</div>
+					<div class="row">
+							{{#accountList}}
+								<div class="col-xl-4 col-sm-6">
+						<div class="card">
+
+							
+
+					    	<div id="{{id}}" class="card-body text-center" onclick="card_click(this);">
+					    		<h6 class="font-weight-semibold mb-0">{{username}}</h6>
+					    		<span class="d-block text-muted">{{id}}</span>
+					    		<span class="d-block text-muted">{{email}}</span>
+					    		<span class="d-block text-muted">{{phone}}</span>
+					    	</div>
+				    	</div>
+					</div>
+							{{/accountList}}
+					</div>
+				</div>
+				
+				<!-- /basic table -->
+				<div id="myModal" class="modal fade" tabindex="-1">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title">유저아이디</h5>
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+							</div>
+
+							<div class="modal-body">
+								<h6 class="font-weight-semibold">사용자 정보</h6>
+								<p>전화번호 : </p>
+
+								<hr>
+
+								<h6 class="font-weight-semibold">유저 이름</h6>
+								<p>Email : </p>
+							</div>
+
+							<div class="modal-footer">
+								<button type="button" class="btn btn-link" data-dismiss="modal">닫기</button>
+								<button type="button" class="btn bg-primary">저장 및 변경</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- modal -->
+			</div>
+			<!-- /content area -->
+
+			<script type="text/javascript">
+				function card_click(obj) {
+					
+					alert("ok " + obj.id);
+					
+					$.ajax({
+						type : "GET",
+						url : "/index/" + obj.id,
+						dataType : "json",
+						error : function(e){
+							console.log("전송 실패");
+							console.log(e);
+						},
+						success : function(obj){
+							console.log("전송 성공");
+							console.log(obj);
+						}
+					});
+				};
+				
+			</script>
+			
+			<!-- Footer -->
+			{{>footer}}
+			<!-- /footer -->
+
+		</div>
+		<!-- /main content -->
+
+	</div>
+	<!-- /page content -->
+	
+</body>
+</html>
