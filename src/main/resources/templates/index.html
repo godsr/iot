@@ -44,27 +44,13 @@
 							{{#accountList}}
 								<div class="col-xl-4 col-sm-6">
 						<div class="card">
-							<div class="card-img-actions">
-								<img class="card-img-top img-fluid" src="../../../../global_assets/images/placeholders/placeholder.jpg" alt="">
-								<div class="card-img-actions-overlay card-img-top">
-									<a href="#" class="btn btn-outline bg-white text-white border-white border-2 btn-icon rounded-round">
-										<i class="icon-plus3"></i>
-									</a>
-									<a href="user_pages_profile.html" class="btn btn-outline bg-white text-white border-white border-2 btn-icon rounded-round ml-2">
-										<i class="icon-link"></i>
-									</a>
-								</div>
-							</div>
+							
 
-					    	<div class="card-body text-center">
+					    	<div id="{{id}}" class="card-body text-center" onclick="card_click(this);">
 					    		<h6 class="font-weight-semibold mb-0">{{username}}</h6>
+					    		<span class="d-block text-muted">{{id}}</span>
 					    		<span class="d-block text-muted">{{phone}}</span>
-
-				    			<div class="list-icons list-icons-extended mt-3">
-			                    	<a href="#" class="list-icons-item" data-popup="tooltip" title="Google Drive" data-container="body"><i class="icon-google-drive"></i></a>
-			                    	<a href="#" class="list-icons-item" data-popup="tooltip" title="Twitter" data-container="body"><i class="icon-twitter"></i></a>
-			                    	<a href="#" class="list-icons-item" data-popup="tooltip" title="Github" data-container="body"><i class="icon-github"></i></a>
-		                    	</div>
+					    		<span class="d-block text-muted">{{email}}</span>
 					    	</div>
 				    	</div>
 					</div>
@@ -76,7 +62,28 @@
 			</div>
 			<!-- /content area -->
 
-
+			<script type="text/javascript">
+				function card_click(obj) {
+					
+					alert("ok " + obj.id);
+					
+					$.ajax({
+						type : "GET",
+						url : "user?id=",
+						dataType : "json",
+						error : function(e){
+							console.log("전송 실패");
+							console.log(e);
+						},
+						success : function(obj){
+							console.log("전송 성공");
+							console.log(obj);
+						}
+					});
+				};
+				
+			</script>
+			
 			<!-- Footer -->
 			{{>footer}}
 			<!-- /footer -->
@@ -86,6 +93,6 @@
 
 	</div>
 	<!-- /page content -->
-
+	
 </body>
 </html>
