@@ -19,6 +19,7 @@ import com.ziumks.iot.repository.AccountRepository;
 
 
 @Controller
+@RequestMapping("/user")
 public class UserController {
 	
 	private static final Logger logger = LogManager.getLogger(UserController.class);
@@ -31,7 +32,7 @@ public class UserController {
 		List<Account> accountList = repository.findAll(Sort.by(Sort.Direction.ASC,"id"));
 		model.addAttribute("title", "hello world");
 		model.addAttribute("accountList", accountList);
-		return "index";
+		return "user";
 	}
 //	@RequestMapping("/search")
 //	public String search(@RequestParam(value="keyword")String keyword, Model model) {
