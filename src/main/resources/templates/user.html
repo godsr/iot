@@ -44,16 +44,22 @@
 							{{#accountList}}
 								<div class="col-xl-4 col-sm-6">
 						<div class="card">
-					    	<div class="card-body text-center">
-					    		<a data-toggle="modal" href="#myModal"><h6 class="font-weight-semibold mb-0">{{username}}</h6></a>
-					    		<input type="hidden" value={{id}}>
+
+							
+
+					    	<div id="{{id}}" class="card-body text-center" onclick="card_click(this);">
+					    		<h6 class="font-weight-semibold mb-0">{{username}}</h6>
+					    		<span class="d-block text-muted">{{id}}</span>
+					    		<span class="d-block text-muted">{{email}}</span>
 					    		<span class="d-block text-muted">{{phone}}</span>
-				    		</div>
+					    		<!-- <a href="#" class="btn btn-lg btn-success" data-toggle="modal" data-target="#myModal">Click</a> -->
+					    	</div>
 				    	</div>
 					</div>
 							{{/accountList}}
 					</div>
 				</div>
+				
 				<!-- /basic table -->
 				<div id="myModal" class="modal fade" tabindex="-1">
 					<div class="modal-dialog">
@@ -83,32 +89,29 @@
 				<!-- modal -->
 			</div>
 			<!-- /content area -->
-<script>
-$(document).ready(function (){
-			
-			
-			
-		$(".username").on("click",function() {
 
-			$.ajax({
-				type : "GET",
-				url : "index?id=",
-				dataType : "json",
-				error : function(e){
-					console.log("전송 실패");
-					console.log(e);
-				},
-				success : function(obj){
-					console.log("전송 성공");
-					console.log(obj);
-				}
-			});
-		});
+			<script type="text/javascript">
+				function card_click(obj) {
+					
+					$.ajax({
+						type : "GET",
+						url : "/user/index/" + obj.id,
+						dataType : "json",
+						error : function(e){
+							console.log("전송 실패");
+							console.log(e);
+						},
+						success : function(obj){
+							console.log("전송 성공");
+							console.log(obj);
+							$('#myModal').modal('show');
+							
+						}
+					});
+				};
+				
+			</script>
 			
-			
-});
-	</script>
-
 			<!-- Footer -->
 			{{>footer}}
 			<!-- /footer -->
@@ -118,6 +121,6 @@ $(document).ready(function (){
 
 	</div>
 	<!-- /page content -->
-
+	
 </body>
 </html>
