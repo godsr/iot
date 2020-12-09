@@ -49,10 +49,10 @@ public class RestTest {
 
     @Test
     public void accountRestTest() throws Exception {
-        mvc.perform(get("/product/list"))
+        mvc.perform(get("/product/opt"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.id", is(8)))
+                .andExpect(jsonPath("$.id", is(5)))
                 .andDo(print());
 
     }
