@@ -1,14 +1,15 @@
 package com.ziumks.iot.domain;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Timestamp;
 
+@Entity
+@Table(name = "AUTHORS")
 public class Author {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String firstName;
     private String lastName;
@@ -19,13 +20,10 @@ public class Author {
     public Author() {
     }
 
-    public Author(Long id, String firstName, String lastName, String email, Date birthdate, Timestamp added) {
-        this.id = id;
+    public Author( String firstName, String lastName, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.birthdate = birthdate;
-        this.added = added;
     }
 
     public Long getId() {
