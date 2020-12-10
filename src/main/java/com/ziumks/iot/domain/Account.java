@@ -3,8 +3,10 @@ package com.ziumks.iot.domain;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "account", schema = "public")
 public class Account {
 	
 	@Id

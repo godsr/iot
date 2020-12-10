@@ -23,7 +23,7 @@
 				<!-- Basic table -->
 				<div class="card">
 					<div class="card-header header-elements-inline">
-						<h5 class="card-title">사용자 정보</h5>
+						<h5 class="card-title">Configuration option</h5>
 						<div class="header-elements">
 							<div class="list-icons">
 		                		<a class="list-icons-item" data-action="collapse"></a>
@@ -31,34 +31,61 @@
 		                		<a class="list-icons-item" data-action="remove"></a>
 		                	</div>
 	                	</div>
-					</div>			
-					<div class="card-body d-sm-flex align-items-sm-center justify-content-sm-between">
-						<div class="col-md- 10" >
-							<input type="text" class="form-control" id="search" placeholder="고객 이름을 입력하세요!">
-						</div>
-						<div>
-							<a href="#" class="btn bg-indigo-300"><i class="icon-statistics mr-2"></i> 찾기</a>
-						</div>
 					</div>
-					<div class="row">
-							{{#accountList}}
-								<div class="col-xl-4 col-sm-6">
-						<div class="card">
 
+					<div class="card-body">
+						The <code>Responsive</code> extension for DataTables can be applied to a DataTable in one of two ways; with a specific <code>class name</code> on the table, or using the DataTables initialisation options. This method shows the latter, with the <code>responsive</code> option being set to the boolean value <code>true</code>. The <code>responsive</code> option can be given as a boolean value, or as an object with configuration options.
+					</div>
+
+					<table class="table datatable-responsive">
+						<thead>
+							<tr>
+								<th>First Name</th>
+								<th>Last Name</th>
+								<th>Job Title</th>
+								<th>DOB</th>
+								<th>Status</th>
+								<th class="text-center">Actions</th>
+							</tr>
+						</thead>			
 							
-
-					    	<div id="{{id}}" class="card-body text-center" onclick="card_click(this);">
-					    		<h6 class="font-weight-semibold mb-0">{{username}}</h6>
-					    		<span class="d-block text-muted">{{id}}</span>
-					    		<span class="d-block text-muted">{{email}}</span>
+<!--								<div class="col-xl-4 col-sm-6">
+						<div class="card">
+					    	<div class="card-body text-center">
+					    		<a data-toggle="modal" href="#myModal" id="{{id}}" onclick="click(this);"><h6 class="font-weight-semibold mb-0">{{username}}</h6></a>
+					    		<input type="hidden" value={{id}}>
 					    		<span class="d-block text-muted">{{phone}}</span>
-					    	</div>
+				    		</div>
 				    	</div>
-					</div>
-							{{/accountList}}
-					</div>
+					</div>-->
+					{{#accountList}}				
+					<tbody>	
+						<tr role="row" class="odd parent">
+								<td>{{id}}</td>
+								<td>{{username}}</td>
+								<td>{{phone}}</td>
+								<td>{{email}}</td>
+								<td><span class="badge badge-danger">Suspended</span></td>
+								<td class="text-center">
+									<div class="list-icons">
+										<div class="dropdown">
+											<a href="#" class="list-icons-item" data-toggle="dropdown" aria-expanded="false">
+												<i class="icon-menu9"></i>
+											</a>
+
+											<div class="dropdown-menu dropdown-menu-right" x-placement="bottom-end" style="position: absolute; transform: translate3d(-158px, 19px, 0px); top: 0px; left: 0px; will-change: transform;">
+												<a href="#" class="dropdown-item"><i class="icon-file-pdf"></i> Export to .pdf</a>
+												<a href="#" class="dropdown-item"><i class="icon-file-excel"></i> Export to .csv</a>
+												<a href="#" class="dropdown-item"><i class="icon-file-word"></i> Export to .doc</a>
+											</div>
+										</div>
+									</div>
+								</td>
+							</tr>
+							</tbody>
+					{{/accountList}}
+					</table>
 				</div>
-				
 				<!-- /basic table -->
 				<div id="myModal" class="modal fade" tabindex="-1">
 					<div class="modal-dialog">
@@ -70,7 +97,7 @@
 
 							<div class="modal-body">
 								<h6 class="font-weight-semibold">사용자 정보</h6>
-								<p>전화번호 : </p>
+								<input type="text" class="form-control" placeholder="Enter your phone..." id="userPhone">
 
 								<hr>
 
@@ -88,29 +115,34 @@
 				<!-- modal -->
 			</div>
 			<!-- /content area -->
+<script>
+function click(obj){
+$(document).ready(function (){
+		$(".username").on("click",function() {
 
-			<script type="text/javascript">
-				function card_click(obj) {
-					
-					alert("ok " + obj.id);
-					
-					$.ajax({
-						type : "GET",
-						url : "user?id=",
-						dataType : "json",
-						error : function(e){
-							console.log("전송 실패");
-							console.log(e);
-						},
-						success : function(obj){
-							console.log("전송 성공");
-							console.log(obj);
-						}
-					});
-				};
-				
-			</script>
-			
+			$.ajax({
+				type : "GET",
+				url : "/index/index"+obj.id,
+				dataType : "json",
+				error : function(e){
+					console.log("전송 실패");
+					console.log(e);
+				},
+				success : function(obj){
+					console.log("전송 성공");
+					console.log(obj);
+					$('#myModal').modal('show');
+					$('#userId').val(obj.id);
+					$('#userName').val(obj.username);
+					$('#userEmail').val(obj.email);
+					$('#userPhone').val(obj.phone);
+				}
+			});
+		});
+});
+};
+	</script>
+
 			<!-- Footer -->
 			{{>footer}}
 			<!-- /footer -->
@@ -120,6 +152,6 @@
 
 	</div>
 	<!-- /page content -->
-	
+
 </body>
 </html>
