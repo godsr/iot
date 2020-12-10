@@ -1,4 +1,4 @@
-package com.ziumks.iot.domain;
+package com.ziumks.iot.web;
 
 import java.util.ArrayList;
 import java.util.List;
