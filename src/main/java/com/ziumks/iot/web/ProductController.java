@@ -7,6 +7,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -20,7 +21,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("/product")
+@RequestMapping("/prod")
 public class ProductController {
 
     private static final Logger logger = LogManager.getLogger(MainController.class);
@@ -28,6 +29,13 @@ public class ProductController {
     @Autowired
     AccountRepository repository;
 
+    @RequestMapping("/")
+    public String list(Model model) {
+        logger.info("list start: ");
+        model.addAttribute("pageTitle", "Iot Admin");
+        model.addAttribute("pageSubTitle", "tipa site 관리");
+        return "prod";
+    }
 
     @RequestMapping("/list")
     public ResponseEntity read(Model model) {
@@ -39,14 +47,18 @@ public class ProductController {
     }
 
     @GetMapping("/paging")
-    public ResponseEntity<Page> findBooksByPageRequest(final Pageable pageable) {
+    @ResponseBody
+    public MyPageData findBooksByPageRequest(final Pageable pageable) {
 
         Page<Account> page =  repository.findAll(pageable);
         long total = page.getTotalElements();
         List<Account> list = page.getContent();
-        ResponseEntity<Page> resp = new ResponseEntity<Page>(page, HttpStatus.OK);
 
-        return resp;
+        //ResponseEntity<Page> resp = new ResponseEntity<Page>(page, HttpStatus.OK);
+        MyPageData myPage = new MyPageData();
+        myPage.setData( list);
+        myPage.setRecordsTotal( page.getTotalElements() );
+        return myPage;
     }
 
     @GetMapping("/opt")

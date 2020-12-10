@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name="client_site_view")
+@Table(name="client_site_view", schema = "iot_web")
 public class ClientSiteView implements Serializable {
 
 	private static final long serialVersionUID = -9113214440020084771L;
