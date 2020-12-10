@@ -36,7 +36,7 @@ public class DvcModelInfo implements Serializable {
 	@Column(name = "dvc_type", length = 300)
 	private String dvcType; // 디바이스 유형
 
-//	@Transient
+	@Transient
 	@Formula("(select iot_web.get_dvc_type_nm(dvc_type, '"+ CommonCode.GRUP_CD.DEVICE_TYPE+"'))")
 	private String dvcTypeNm; // 디바이스 유형 명
 
