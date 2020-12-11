@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface AuthorRepository extends JpaRepository<Author, Long>{
-
-	List<Author> findByLastName(String name);
+	
+	@Query(nativeQuery = true, value = "select * from authors where id < :id")
+	List<Author> findByIdRange(Long id);
 }

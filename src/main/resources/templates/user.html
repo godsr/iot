@@ -43,61 +43,48 @@
 				<div id="DataTables_Table_0_wrapper"
 					class="dataTables_wrapper no-footer">
 
-					<div class="datatable-scroll-wrap">
-						<table
-							class="table datatable-responsive dataTable no-footer dtr-inline collapsed"
-							id="DataTables_Table_0" role="grid"
-							aria-describedby="DataTables_Table_0_info">
+						<div class="card">
+							<div class="card-header header-elements-inline">
+								<h5 class="card-title">Basic table</h5>
+								<div class="header-elements">
+									<div class="list-icons">
+										<a class="list-icons-item" data-action="collapse"></a> <a
+											class="list-icons-item" data-action="reload"></a> <a
+											class="list-icons-item" data-action="remove"></a>
+									</div>
+								</div>
+							</div>
 
-							<tbody>
-								{{#accountList}}
-								<tr role="row" class="odd" id={{id}} onclick="card_click(this);">
-									<td tabindex="0" class="sorting_1" style="">{{id}}</td>
-									<td style="">{{username}}</td>
-									<td style="">{{email}}</td>
-									<td style="">{{phone}}</td>
-									<td style=""><span class="badge badge-danger">Suspended</span></td>
-									<td class="text-center" style="display: none;">
-										<div class="list-icons">
-											<div class="dropdown">
-												<a href="#" class="list-icons-item" data-toggle="dropdown">
-													<i class="icon-menu9"></i>
-												</a>
-
-												<div class="dropdown-menu dropdown-menu-right">
-													<a href="#" class="dropdown-item"><i
-														class="icon-file-pdf"></i> Export to .pdf</a> <a href="#"
-														class="dropdown-item"><i class="icon-file-excel"></i>
-														Export to .csv</a> <a href="#" class="dropdown-item"><i
-														class="icon-file-word"></i> Export to .doc</a>
-												</div>
-											</div>
-										</div>
-									</td>
-								</tr>
-								{{/accountList}}
-							</tbody>
-						</table>
-					</div>
-					<div class="datatable-footer">
-						<div class="dataTables_info" id="DataTables_Table_0_info"
-							role="status" aria-live="polite">Showing 1 to 10 of 15
-							entries</div>
-						<div class="dataTables_paginate paging_simple_numbers"
-							id="DataTables_Table_0_paginate">
-							<a class="paginate_button previous disabled"
-								aria-controls="DataTables_Table_0" data-dt-idx="0" tabindex="0"
-								id="DataTables_Table_0_previous">←</a><span><a
-								class="paginate_button current"
-								aria-controls="DataTables_Table_0" data-dt-idx="1" tabindex="0">1</a><a
-								class="paginate_button " aria-controls="DataTables_Table_0"
-								data-dt-idx="2" tabindex="0">2</a></span><a
-								class="paginate_button next" aria-controls="DataTables_Table_0"
-								data-dt-idx="3" tabindex="0" id="DataTables_Table_0_next">→</a>
+						<div class="table-responsive">
+							<table class="table">
+								<thead>
+									<tr>
+										<th>ID</th>
+										<th>First Name</th>
+										<th>Last Name</th>
+										<th>Email</th>
+										<th>Birth Date</th>
+									</tr>
+								</thead>
+								<tbody>
+									{{#list}}
+									<tr role="row" class="odd" id={{id}}
+										onclick="javascript:card_click(this);">
+										<td tabindex="0" class="sorting_1" style="">{{id}}</td>
+										<td style="">{{firstName}}</td>
+										<td style="">{{lastName}}</td>
+										<td style="">{{Email}}</td>
+										<td style="">{{birthdate}}</td>
+									</tr>
+									{{/list}}
+								</tbody>
+							</table>
 						</div>
 					</div>
-				</div>
-				
+						<!-- /basic table -->
+
+				</div>	
+							
 				<div id="myModal" class="modal fade" tabindex="-1">
 				<div class="modal-dialog">
 					<div class="modal-content">
@@ -111,36 +98,43 @@
 								<label class="col-form-label col-lg-2">User Id</label>
 								<div class="col-lg-10">
 									<input type="text" class="form-control"
-										placeholder="Enter your userId..." id="userId"
+										placeholder="Enter your userId..." id="id"
 										disabled="disabled">
 								</div>
 							</div>
 							<div class="form-group row">
-								<label class="col-form-label col-lg-2">사용자 이름</label>
+								<label class="col-form-label col-lg-2">이름</label>
 								<div class="col-lg-10">
 									<input type="text" class="form-control"
-										placeholder="Enter your username..." id="userName">
+										placeholder="Enter your username..." id="firstName">
 								</div>
 							</div>
 							<div class="form-group row">
-								<label class="col-form-label col-lg-2">전화번호</label>
+								<label class="col-form-label col-lg-2">성</label>
 								<div class="col-lg-10">
 									<input type="text" class="form-control"
-										placeholder="Enter your phone..." id="userPhone">
+										placeholder="Enter your username..." id="lastName">
 								</div>
 							</div>
 							<div class="form-group row">
 								<label class="col-form-label col-lg-2">이메일</label>
 								<div class="col-lg-10">
 									<input type="text" class="form-control"
-										placeholder="Enter your email..." id="userEmail">
+										placeholder="Enter your email..." id="email">
+								</div>
+							</div>
+							<div class="form-group row">
+								<label class="col-form-label col-lg-2">생년월일</label>
+								<div class="col-lg-10">
+									<input type="text" class="form-control"
+										placeholder="Enter your phone..." id="birthdate">
 								</div>
 							</div>
 						</div>
 
 						<div class="modal-footer">
 							<button type="button" class="btn btn-link" data-dismiss="modal">닫기</button>
-							<button type="button" class="btn bg-primary">저장 및 변경</button>
+							<button type="button" class="btn bg-primary" onclick="javascript:save_click(this);">저장 및 변경</button>
 						</div>
 					</div>
 				</div>
@@ -153,11 +147,12 @@
 		</div>
 		<script type="text/javascript">
 			function card_click(obj) {
-				$(document).ready(function() {
-
+					
+					console.log(obj.id);
+					
 					$.ajax({
 						type : "GET",
-						url : "/user/index/" + obj.id,
+						url : "/user/" + obj.id,
 						dataType : "json",
 						error : function(e) {
 							console.log("전송 실패");
@@ -170,12 +165,39 @@
 
 							$('#myModal').modal('show');
 
-							$('#userId').val(obj.id);
-							$('#userName').val(obj.username);
-							$('#userEmail').val(obj.email);
-							$('#userPhone').val(obj.phone);
+							$('#id').val(obj.id);
+							$('#firstName').val(obj.firstName);
+							$('#lastName').val(obj.lastName);
+							$('#email').val(obj.email);
+							$('#birthdate').val(obj.birthdate);
 						}
-					});
+				});
+			};
+			
+			function save_click(obj){
+				
+				var author = {
+						id: $("#id").val(),
+						firstName: $("#firstName").val(),
+						lastName: $("#lastName").val(),
+						email: $("#email").val(),
+						birthdate: $("#birthdate").val()
+				}
+
+				console.log(author);
+				
+				$.ajax({
+					type : "POST",
+					url : "/user/save/",
+					dataType : "json",
+					data : JSON.stringify(author),
+					error : function(e) {
+						console.log("전송 실패");
+						console.log(e);
+					},
+					success : function(obj){
+						alert('저장되었습니다.');
+					}
 				});
 			};
 		</script>

@@ -23,7 +23,7 @@ import com.ziumks.iot.domain.CompanyInfo;
 import org.hibernate.annotations.Formula;
 
 @Entity
-@Table(name="dvc_info_view")
+@Table(name="dvc_info_view", schema = "iot_web")
 public class DvcInfoView implements Serializable {
 
 	private static final long serialVersionUID = -9113214440020084771L;
