@@ -1,29 +1,26 @@
 {{>header}}
 
-	<!-- Page content -->
-	<div class="page-content">
+<!-- Page content -->
+<div class="page-content">
 
-		<!-- Main sidebar -->
-		{{>slider}}
-		<!-- /main sidebar -->
-
-
-		<!-- Main content -->
-		<div class="content-wrapper">
-
-			<!-- Page header -->
-			{{>header2}}
-			<!-- /page header -->
+	<!-- Main sidebar -->
+	{{>slider}}
+	<!-- /main sidebar -->
 
 
-			<!-- Content area -->
-			<div class="content">
+	<!-- Main content -->
+	<div class="content-wrapper">
 
+		<!-- Page header -->
+		{{>header2}}
+		<!-- /page header -->
 
-				<!-- Basic table -->
+		<div class="content pt-0">
+
+			<!-- Bordered table -->
 				<div class="card">
 					<div class="card-header header-elements-inline">
-						<h5 class="card-title">Configuration option</h5>
+						<h5 class="card-title">Hover rows</h5>
 						<div class="header-elements">
 							<div class="list-icons">
 		                		<a class="list-icons-item" data-action="collapse"></a>
@@ -34,124 +31,158 @@
 					</div>
 
 					<div class="card-body">
-						The <code>Responsive</code> extension for DataTables can be applied to a DataTable in one of two ways; with a specific <code>class name</code> on the table, or using the DataTables initialisation options. This method shows the latter, with the <code>responsive</code> option being set to the boolean value <code>true</code>. The <code>responsive</code> option can be given as a boolean value, or as an object with configuration options.
+						Example of a table with fully <code>bordered</code> cells. Add <code>.table-bordered</code> to the base <code>.table</code> class for borders on all sides of the table and cells. This is a default Bootstrap option for the table, for more advanced border options check <a href="table_borders.html">Table borders</a> page. Bordered table can be combined with other table styles.
 					</div>
 
-					<table class="table datatable-responsive">
-						<thead>
-							<tr>
-								<th>First Name</th>
-								<th>Last Name</th>
-								<th>Job Title</th>
-								<th>DOB</th>
-								<th>Status</th>
-								<th class="text-center">Actions</th>
-							</tr>
-						</thead>			
-							
-<!--								<div class="col-xl-4 col-sm-6">
-						<div class="card">
-					    	<div class="card-body text-center">
-					    		<a data-toggle="modal" href="#myModal" id="{{id}}" onclick="click(this);"><h6 class="font-weight-semibold mb-0">{{username}}</h6></a>
-					    		<input type="hidden" value={{id}}>
-					    		<span class="d-block text-muted">{{phone}}</span>
-				    		</div>
-				    	</div>
-					</div>-->
-					{{#accountList}}				
-					<tbody>	
-						<tr role="row" class="odd parent">
-								<td>{{id}}</td>
-								<td>{{username}}</td>
-								<td>{{phone}}</td>
-								<td>{{email}}</td>
-								<td><span class="badge badge-danger">Suspended</span></td>
-								<td class="text-center">
-									<div class="list-icons">
-										<div class="dropdown">
-											<a href="#" class="list-icons-item" data-toggle="dropdown" aria-expanded="false">
-												<i class="icon-menu9"></i>
-											</a>
-
-											<div class="dropdown-menu dropdown-menu-right" x-placement="bottom-end" style="position: absolute; transform: translate3d(-158px, 19px, 0px); top: 0px; left: 0px; will-change: transform;">
-												<a href="#" class="dropdown-item"><i class="icon-file-pdf"></i> Export to .pdf</a>
-												<a href="#" class="dropdown-item"><i class="icon-file-excel"></i> Export to .csv</a>
-												<a href="#" class="dropdown-item"><i class="icon-file-word"></i> Export to .doc</a>
-											</div>
-										</div>
-									</div>
-								</td>
-							</tr>
+					<div class="table-responsive">
+						<table class="table table-hover">
+							<thead>
+								<tr>
+									<th>id</th>
+									<th>title</th>
+									<th>date</th>
+								</tr>
+							</thead>
+							{{#postList}}
+							<tbody>
+								<tr>
+									<td>{{id}}</td>
+									<td><a data-toggle="modal" data-target="#modal_default" href='javascript:void(0);' onClick='card_click(this); return false'id='{{id}}'>{{title}}</a></td>
+									<td>{{date}}</td>
+								</tr>
 							</tbody>
-					{{/accountList}}
-					</table>
+							{{/postList}}
+						</table>
+					</div>
 				</div>
-				<!-- /basic table -->
-				<div id="myModal" class="modal fade" tabindex="-1">
+				<!-- /bordered table -->
+				
+				<div class="col-lg-12">
+						<div class="card card-body border-top-teal text-center">
+							<ul class="pagination pagination-flat align-self-center">
+								<li class="page-item"><a href="#" class="page-link">&larr; &nbsp; Prev</a></li>
+								<li class="page-item active"><a href="/?page=0&size=20&sort=id,asc" class="page-link">1</a></li>
+								<li class="page-item active"><a href="/?page=1&size=20&sort=id,asc" class="page-link">2</a></li>
+								<li class="page-item active"><a href="/?page=2&size=20&sort=id,asc" class="page-link">3</a></li>
+								<li class="page-item active"><a href="/?page=3&size=20&sort=id,asc" class="page-link">4</a></li>
+								<li class="page-item active"><a href="/?page=4&size=20&sort=id,asc" class="page-link">5</a></li>
+								<li class="page-item"><a href="#" class="page-link">Next &nbsp; &rarr;</a></li>
+							</ul>
+						</div>
+					</div>
+				
+					<!-- Basic modal -->
+				<div id="modal_default" class="modal fade" tabindex="-1">
 					<div class="modal-dialog">
 						<div class="modal-content">
 							<div class="modal-header">
-								<h5 class="modal-title">유저아이디</h5>
+								<h5 class="modal-title">Basic modal</h5>
 								<button type="button" class="close" data-dismiss="modal">&times;</button>
 							</div>
 
 							<div class="modal-body">
-								<h6 class="font-weight-semibold">사용자 정보</h6>
-								<input type="text" class="form-control" placeholder="Enter your phone..." id="userPhone">
-
+								<h6 class="font-weight-semibold">modal information</h6>
+								<div class="col-lg-10">
+								<input type="text" class="form-control"
+										placeholder="Enter your userId..." id="id"
+										disabled="disabled">
+								</div>		
+								<hr>
+								<div class="col-lg-10">
+									<input type="text" class="form-control"
+										placeholder="제목을 입력하세요" id="title">
+								</div>
+								
+								<hr>
+								
+								<div class="col-lg-10">
+								<textarea cols="80" rows="3" id="description"></textarea>
+								</div>
+								
 								<hr>
 
-								<h6 class="font-weight-semibold">유저 이름</h6>
-								<p>Email : </p>
+								<div class="col-lg-10">
+								<textarea cols="80" rows="6" id="content"></textarea>
+								</div>
+								
+								<hr>
+								<div class="col-lg-10">		
+								<input type="text" class="form-control" id="date" disabled="disabled">
+								</div>		
 							</div>
 
 							<div class="modal-footer">
-								<button type="button" class="btn btn-link" data-dismiss="modal">닫기</button>
-								<button type="button" class="btn bg-primary">저장 및 변경</button>
+								<button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
+								<button type="button" class="btn bg-primary" id="savebtn">Save changes</button>
 							</div>
 						</div>
 					</div>
 				</div>
-				<!-- modal -->
-			</div>
-			<!-- /content area -->
-<script>
-function click(obj){
-$(document).ready(function (){
-		$(".username").on("click",function() {
-
-			$.ajax({
-				type : "GET",
-				url : "/index/index"+obj.id,
-				dataType : "json",
-				error : function(e){
-					console.log("전송 실패");
-					console.log(e);
-				},
-				success : function(obj){
-					console.log("전송 성공");
-					console.log(obj);
-					$('#myModal').modal('show');
-					$('#userId').val(obj.id);
-					$('#userName').val(obj.username);
-					$('#userEmail').val(obj.email);
-					$('#userPhone').val(obj.phone);
-				}
-			});
-		});
-});
-};
-	</script>
-
-			<!-- Footer -->
-			{{>footer}}
-			<!-- /footer -->
-
+			<!-- basic modal -->	
 		</div>
-		<!-- /main content -->
+		<script type="text/javascript">
+			function card_click(obj) {
+				$(document).ready(function() {
+
+					$.ajax({
+						type : "GET",
+						url : "/index/" + obj.id,
+						dataType : "json",
+						error : function(e) {
+							console.log("전송 실패");
+							console.log(e);
+						},
+						success : function(obj) {
+
+							console.log("전송 성공");
+							console.log(obj);
+
+							$('#modal_default').modal('show');
+
+							$('#id').val(obj.id);
+							$('#authorId').val(obj.authorId);
+							$('#title').val(obj.title);
+							$('#description').val(obj.description);
+							$('#content').val(obj.content);
+							$('#date').val(obj.date);
+						}
+					});
+				});
+			};
+			
+			$("#savebtn").on("click",function() {
+			    guestVO = {name : $("[name=name]").val(),
+			                password : $("[name=password]").val(),
+			                content : $("[name=content]").val()};
+			    $.ajax({
+			        url: "/index/"+obj.id,
+			        type: "put",
+			        contentType: "application/json",
+			        data: JSON.stringify(Post),
+			        dataType: "json",
+			        success: function (Post) {
+			            
+			            render(Post,"up");
+			            $("[name=name]").val("");
+			            $("[name=password]").val("");
+			            $("[name=content]").val("");
+			        },
+			        error: function (XHR, status, error) {
+			            console.error(status + " : " + error);
+			        }
+			    });
+			});
+		</script>
+		<!-- Footer -->
+		{{>footer}}
+		<!-- /footer -->
 
 	</div>
-	<!-- /page content -->
+	<!-- /main content -->
+
+
+</div>
+<!-- /page content -->
 
 </body>
 </html>
