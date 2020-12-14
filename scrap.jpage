@@ -1,0 +1,72 @@
+String sortStr = "dvcId,asc";
+int barSize = 10;
+long totalElements = 94;
+int size = 20;
+
+int totalPage = 48;
+int page = 34;
+
+
+// pagebar의 첫번째 페이지 ( 11, 12, 13, 14,1 5, 16, 17, 18, 19, 20 ) 에서 11을 말함. 링크 용으로 -1을 해줘서 10이 된다. 화면에 표시는 11로.
+int startPage = ((int)((page + 1)  / barSize)) * barSize  ;
+
+// pageBar의 마지막 페이지  ( 11, 12, 13, 14,1 5, 16, 17, 18, 19, 20 ) 에서 20을 말함. 링크 용으로 -1을 해줘서 19가 된다. 화면에 표시는 20으로. 
+int endPage = ((int)((page + 1)  / barSize)) * barSize + barSize -1 ;
+
+// 단 마지막 페이지가 전체 페이지 보다 크면 전체페이지까지만 
+if(endPage > totalPage){
+	endPage = totalPage;
+}
+
+
+// 첫번째 페이지가 1에서 10사이면 첫페이지가기와 이전 페이지 가기를 표시하지 않음.
+int prevPage = -1;
+int firstPage = -1;
+
+if( startPage >= barSize ) {
+	firstPage = 0;
+	prevPage = startPage -1;
+}
+
+// 마지막 표시 바에서는 마지막페이지가기와 다음 페이지 표시를 하지 않음.
+int nextPage = -1;
+int lastPage = -1;
+if( ( totalPage - startPage ) >= barSize ) {
+	nextPage = endPage + 1;
+	lastPage = totalPage;
+}
+	
+
+String tagStr = "<ul class=\"pagination align-self-center\">\n";
+
+if ( prevPage != -1 ) {
+	tagStr += "<li class=\"page-item\"><a href='/list?page=" + firstPage + "&size=" + size + "&sort=" + sortStr + "'  class=\"page-link\"><i class=\"icon-arrow-left12\"></a> \n" ;
+	tagStr += "<li class=\"page-item\"><a href='/list?page=" + prevPage + "&size=" + size + "&sort=" + sortStr + "'  class=\"page-link\">&larr; &nbsp; 이전</a>  \n" ;
+}
+
+int opPage = 0;
+for (int i = 0; i < barSize; i++ ) {
+	opPage = startPage+i;
+	tagStr += "<li class=\"page-item\"><a href='/list?page=" + (startPage + i) + "&size=" + size + "&sort=" + sortStr + "'  class=\"page-link\"> " + (startPage + i +1) +  " </a> \n";
+}
+if ( lastPage != -1 ) {
+	tagStr += "<li class=\"page-item\"><a href='/list?page=" + nextPage + "&size=" + size + "&sort=" + sortStr + "'  class=\"page-link\">다음 &nbsp; &rarr;</a> \n" ;
+	tagStr += "<li class=\"page-item\"><a href='/list?page=" + lastPage + "&size=" + size + "&sort=" + sortStr + "'  class=\"page-link\"><i class=\"icon-arrow-right13\"></a> \n" ;
+}
+
+tagStr += "</ul>\n";
+
+<ul class="pagination align-self-center">
+<li class="page-item"><a href="#" class="page-link">&larr; &nbsp; Prev</a></li>
+<li class="page-item active"><a href="#" class="page-link">1</a></li>
+<li class="page-item"><a href="#" class="page-link">2</a></li>
+<li class="page-item disabled"><a href="#" class="page-link">3</a></li>
+<li class="page-item"><a href="#" class="page-link">4</a></li>
+<li class="page-item"><a href="#" class="page-link">Next &nbsp; &rarr;</a></li>
+</ul>
+
+
+
+
+
+System.out.print(tagStr);
