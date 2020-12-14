@@ -1,11 +1,17 @@
 package com.ziumks.iot.web;
 
-import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.coyote.Request;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,10 +33,15 @@ public class AuthorController {
 	    AuthorRepository repository;
 
 	    @RequestMapping("/list")
-	    public String author(Model model) {
-	    	List<Author> authorList = repository.findByIdRange(20L);
-	        model.addAttribute("list", authorList);
-	        return "user";
+	    public String author(HttpServletRequest request, Model model, 
+	    		@PageableDefault(sort = { "id" }, direction = Direction.ASC, size = 10) Pageable pageable) {
+
+	    	Page<Author> authorList = repository.findAll(pageable);
+	        String pagerTag = PagerTag.by(authorList, request.getRequestURI());
+
+	    	model.addAttribute("list", authorList.getContent());
+	        model.addAttribute("pagerTag", pagerTag);
+	    	return "user";
 	    }
 	    
 	    @RequestMapping("/{id}")
