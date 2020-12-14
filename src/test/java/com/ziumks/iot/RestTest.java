@@ -49,7 +49,7 @@ public class RestTest {
 
     @Test
     public void accountRestTest() throws Exception {
-        mvc.perform(get("/product/opt"))
+        mvc.perform(get("/prod/plist?page=14&size=5&sort=dvcId,asc"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.id", is(5)))

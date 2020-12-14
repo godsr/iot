@@ -21,16 +21,9 @@ import static org.junit.Assert.assertEquals;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class DvcInfoRepositoryTest {
-    @Autowired
-    DataSource dataSource;
-    @Autowired
-    JdbcTemplate jdbcTemplate;
-
 
     @Autowired
     private DvcInfoRepository repository;
-
-
 
 
     @Test

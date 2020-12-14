@@ -40,6 +40,7 @@
             <h6 class="font-weight-semibold">How does it work?</h6>
             <p>You open one of the starter pages, add necessary plugins, uncomment paths to files in components.less file, compile new CSS. That's it. I'd also recommend to open one of main pages with functionality you need and copy all paths/JS code from there to your new page, it's just faster and easier.</p>
         </div>
+        <button id="sebtn" type="button" class="btn bg-teal-400 btn-labeled btn-labeled-left"><b><i class="icon-reading"></i></b> Labeled</button>
     </div>
     <!-- /basic card -->
 
@@ -49,7 +50,26 @@
 
 
 
+<script>
 
+$(document).ready(function () {
+
+
+
+    $("#sebtn").click(function () {
+        console.log("save click!!!");
+        location.href="/prod/plist?page=1&size=10&sort=dvcId,asc";
+    });
+
+
+
+
+
+});
+
+
+
+</script>
 
 
 

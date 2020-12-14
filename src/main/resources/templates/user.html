@@ -191,6 +191,7 @@
 					url : "/user/save/",
 					dataType : "json",
 					data : JSON.stringify(author),
+					contentType : "application/json; charset=UTF-8",
 					error : function(e) {
 						console.log("전송 실패");
 						console.log(e);
