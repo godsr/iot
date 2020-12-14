@@ -2,11 +2,16 @@ package com.ziumks.iot.web;
 
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -17,7 +22,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.ziumks.iot.domain.Author;
 import com.ziumks.iot.domain.Post;
 import com.ziumks.iot.repository.PostRepository;
 
@@ -55,19 +59,19 @@ public class MainController {
 		logger.info(post);
 		return post;
 	}
-	@RequestMapping("/")
-	public String post(Model model, Pageable pageable) {
-		logger.info("list start: ");
-		Page<Post> postList = postrepository.findAll(pageable);
-		int startPage = Math.max(0, postList.getPageable().getPageNumber() -5);
-		int endPage = Math.min(postList.getTotalPages(), postList.getPageable().getPageNumber() +5);
-		model.addAttribute("startPage", startPage);
-		model.addAttribute("endPage", endPage);
-		model.addAttribute("postList", postList);
-		model.addAttribute("pagenation", 5);
-		
-		return "index";
-	}
+//	@RequestMapping("/")
+//	public String post(Model model, Pageable pageable) {
+//		logger.info("list start: ");
+//		Page<Post> postList = postrepository.findAll(pageable);
+//		int startPage = Math.max(0, postList.getPageable().getPageNumber() -5);
+//		int endPage = Math.min(postList.getTotalPages(), postList.getPageable().getPageNumber() +5);
+//		model.addAttribute("startPage", startPage);
+//		model.addAttribute("endPage", endPage);
+//		model.addAttribute("postList", postList);
+//		model.addAttribute("pagenation", 5);
+//		
+//		return "index";
+//	}
 	
 	@ResponseBody
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
@@ -77,6 +81,19 @@ public class MainController {
 		return new ResponseEntity<String>("success", HttpStatus.OK);
 	}
 	
+	@RequestMapping("/")
+    public String plist(HttpServletRequest request, Model model, @PageableDefault(sort = { "id" }, direction = Direction.ASC, size = 10) Pageable pageable) {
+        logger.info("post info: ");
+        Page<Post> postinfos = postrepository.findAll(pageable);
+        
+        String pageTag = PagerTag.by(postinfos, request.getRequestURI());
+        
+        model.addAttribute("pagerTag", pageTag);
+        model.addAttribute("postList", postinfos.getContent());
+        System.out.println(pageTag);
+//        return new ResponseEntity<>(dvcInfos, HttpStatus.OK);
+        return "index";
+	}
 //	@RequestMapping("/index/{id}")
 //	@RequestBody
 //	public int modify(Post post) {
