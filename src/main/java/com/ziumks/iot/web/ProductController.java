@@ -67,12 +67,12 @@ public class ProductController {
     
     
     @RequestMapping("/list")
-    public ResponseEntity read(Model model) {
+    public  HttpEntity<Account>  read(Model model) {
         Account account = new Account();
         account.setId(8l);
         account.setUsername("poland");
         account.setEmail("poland@pol.com");
-        return new ResponseEntity(account, HttpStatus.OK);
+        return new ResponseEntity<Account>(account, HttpStatus.OK);
     }
 
 //    @GetMapping("/paging")
