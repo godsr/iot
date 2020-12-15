@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>{{>layout/head}}
+</head>
+<body>
+
+	{{>layout/mainslider}}
+
+
+
+
+
+
+	<!-- Content area -->
+	<div class="content">
+
+
+
+		<!-- Basic card -->
+		<div class="card">
+			<div class="card-header header-elements-inline">
+				<h5 class="card-title">업체관리{{htmlzium}}</h5>
+				<div class="header-elements">
+					<div class="list-icons">
+						<a class="list-icons-item" data-action="collapse"></a> <a
+							class="list-icons-item" data-action="reload"></a> <a
+							class="list-icons-item" data-action="remove"></a>
+					</div>
+				</div>
+			</div>
+
+			<div class="card-body">
+
+
+				<div class="table-responsive">
+					<table class="table">
+						<thead>
+							<tr>
+								<th>client</th>
+								<th>site</th>
+								<th>company</th>
+								<th>type</th>
+								<th>tel</th>
+								<th>address</th>
+								<th>manager</th>
+								<th>phone</th>
+								<th>email</th>
+							</tr>
+						</thead>
+						<tbody>
+							{{#compList}}
+							<tr  role="row" class="odd" id={{coId}}
+										onclick="javascript:card_click(this);">
+								<td tabindex="0" class="sorting_1">{{clientCd}}</td>
+								<td>{{siteCd}}</td>
+								<td>{{coNm}}</td>
+								<td>{{coType}}</td>
+								<td>{{coPhone}}</td>
+								<td>{{coAddr}}</td>
+								<td>{{coMngr}}</td>
+								<td>{{coMngrPhone}}</td>
+								<td>{{coMngrEmail}}</td>
+							</tr>
+							{{/compList}}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		
+		<div class="col-lg-12">
+			<div class="card card-body border-top-teal text-center">
+				<ul class="pagination pagination-flat align-self-center">
+					{{{pagerTag}}}
+				</ul>
+			</div>
+		</div>
+		<!-- /basic card -->
+		
+		<!-- Vertical form modal -->
+				<div id="modal_default" class="modal fade" tabindex="-1">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title">업체 상세 정보</h5>
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+							</div>
+
+							<form action="#">
+								<div class="modal-body">
+									<div class="form-group">
+										<div class="row">
+											<div class="col-sm-6">
+												<input type="hidden" id="coId">
+												<input type="hidden" id="creDtm">
+												<input type="hidden" id="updDtm">
+												<input type="hidden" id="regrt">
+												<input type="hidden" id="use_yn">
+												<label>client</label>
+												<input type="text" placeholder="client" class="form-control" id="clientCd">
+											</div>
+
+											<div class="col-sm-6">
+												<label>site</label>
+												<input type="text" placeholder="site" class="form-control" id="siteCd">
+											</div>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<div class="row">
+											<div class="col-sm-6">
+												<label>company</label>
+												<input type="text" placeholder="company" class="form-control" id="coNm">
+											</div>
+
+											<div class="col-sm-6">
+												<label>type</label>
+												<input type="text" placeholder="type" class="form-control" id="coType">
+											</div>
+										</div>
+									</div>
+									
+									<div class="form-group">
+										<div class="row">
+											<div class="col-sm-6">
+												<label>tel</label>
+												<input type="text" placeholder="tel" class="form-control" id="coPhone">
+											</div>
+
+											<div class="col-sm-6">
+												<label>address</label>
+												<input type="text" placeholder="address" class="form-control" id="coAddr">
+											</div>
+										</div>
+									</div>
+									
+									<div class="form-group">
+										<div class="row">
+											<div class="col-sm-4">
+												<label>manager</label>
+												<input type="text" placeholder="manager" class="form-control" id=coMngr>
+											</div>
+
+											<div class="col-sm-4">
+												<label>email</label>
+												<input type="text" placeholder="manager email" class="form-control" id=coMngrEmail>
+											</div>
+
+											<div class="col-sm-4">
+												<label>phone</label>
+												<input type="text" placeholder="manager phone" class="form-control" id=coMngrPhone>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="modal-footer">
+									<button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
+									<button type="submit" class="btn bg-primary" onclick="javascript:save_click(this);">Save</button>
+									<button type="submit" class="btn bg-danger" onclick="javascript:delete_click(this);">Delete</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+				<!-- /vertical form modal -->
+				
+	</div>
+	<!-- /content area -->
+
+
+
+	<script>
+	function card_click(obj) {
+		$(document).ready(function() {
+
+			$.ajax({
+				type : "GET",
+				url : "/comp/index/" + obj.id,
+				dataType : "json",
+				error : function(e) {
+					console.log("전송 실패");
+					console.log(e);
+				},
+				success : function(obj) {
+
+					console.log("전송 성공");
+					console.log(obj);
+
+					$('#modal_default').modal('show');
+
+					$('#coId').val(obj.coId);
+					$('#clientCd').val(obj.clientCd);
+					$('#siteCd').val(obj.siteCd);
+					$('#coNm').val(obj.coNm);
+					$('#coType').val(obj.coType);
+					$('#coPhone').val(obj.coPhone);
+					$('#coAddr').val(obj.coAddr);
+					$('#coMngr').val(obj.coMngr);
+					$('#coMngrPhone').val(obj.coMngrPhone);
+					$('#coMngrEmail').val(obj.coMngrEmail);
+					$('#creDtm').val(obj.creDtm);
+					$('#updDtm').val(obj.updDtm);
+					$('#regrt').val(obj.regrt);
+					$('#use_yn').val(obj.use_yn);
+					
+				}
+			});
+		});
+	};
+	
+	function save_click(obj){
+					
+					var comp = {
+							coId: $("#coId").val(),
+							clientCd: $("#clientCd").val(),
+							siteCd: $("#siteCd").val(),
+							coNm: $("#coNm").val(),
+							coType: $("#coType").val(),
+							coPhone: $("#coPhone").val(),
+							coAddr: $("#coAddr").val(),
+							coMngr: $("#coMngr").val(),
+							coMngrPhone: $("#coMngrPhone").val(),
+							coMngrEmail: $("#coMngrEmail").val(),
+							creDtm: $("#creDtm").val(),
+							updDtm: $("#updDtm").val(),
+							regrt: $("#regrt").val(),
+							use_yn: $("#use_yn").val()
+
+					}
+					$.ajax({
+						type : "POST",
+						url : "/comp/save/",
+						dataType : "text",
+						contentType: "application/json",
+						data : JSON.stringify(comp),
+						success : function(obj){
+							alert('저장되었습니다.');
+						},
+						error : function(e) {
+							console.log("전송 실패");
+							console.log(e);
+						}
+					});
+				};
+				
+	function delete_click(obj){
+		
+				var delId= {coId: $("#coId").val()
+						
+					}
+						$.ajax({
+							type : "POST",
+							url : "/comp/delete/",
+							dataType : "text",
+							contentType: "application/json",
+							data : JSON.stringify(delId),
+							success : function(obj){
+							alert('삭제되었습니다.');
+							},
+							error : function(e) {
+							console.log("삭제 실패");
+							console.log(e);
+						}
+					});
+				};
+				
+				
+	</script>
+
+
+
+
+
+	{{>layout/footer}}
+
+</body>
+</html>

@@ -6,6 +6,8 @@ import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
@@ -14,9 +16,10 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.Where;
+
 import com.ziumks.iot.config.CommonCode;
 import com.ziumks.iot.domain.view.ClientSiteView;
-import org.hibernate.annotations.Where;
 
 
 
@@ -28,6 +31,7 @@ public class CompanyInfo  implements Serializable {
 
     @Id
     @Column(name = "co_id", length = 255)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private String coId;
 
     @Column(name = "co_nm", length = 255)
@@ -75,13 +79,13 @@ public class CompanyInfo  implements Serializable {
     @Transient
     private String updDtmView;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumns(value = {
-            @JoinColumn(name = "client_cd", referencedColumnName = "client_cd", updatable = false, insertable = false),
-            @JoinColumn(name = "site_cd", referencedColumnName = "site_cd", updatable = false, insertable = false)
-    })
-    @Embedded
-    private ClientSiteView clientSiteView;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumns(value = {
+//            @JoinColumn(name = "client_cd", referencedColumnName = "client_cd", updatable = false, insertable = false),
+//            @JoinColumn(name = "site_cd", referencedColumnName = "site_cd", updatable = false, insertable = false)
+//    })
+//    @Embedded
+//    private ClientSiteView clientSiteView;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "co_gb", referencedColumnName = "cd", updatable = false, insertable = false)
@@ -186,13 +190,13 @@ public class CompanyInfo  implements Serializable {
         this.updDtm = updDtm;
     }
 
-    public ClientSiteView getClientSiteView() {
-        return clientSiteView;
-    }
+//    public ClientSiteView getClientSiteView() {
+//        return clientSiteView;
+//    }
 
-    public void setClientSiteView(ClientSiteView clientSiteView) {
-        this.clientSiteView = clientSiteView;
-    }
+//    public void setClientSiteView(ClientSiteView clientSiteView) {
+//        this.clientSiteView = clientSiteView;
+//    }
 
     public String getCreDtmView() {
         return creDtmView;

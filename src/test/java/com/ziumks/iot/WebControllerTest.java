@@ -23,6 +23,7 @@ public class WebControllerTest {
         //when
         String body = this.restTemplate.getForObject("/prod/plist", String.class);
 
+        System.out.println(body);
         //then
         assertThat(body).contains("HTML ziumks");
     }
