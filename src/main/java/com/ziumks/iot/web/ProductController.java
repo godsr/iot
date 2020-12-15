@@ -38,7 +38,7 @@ public class ProductController {
     
 
 
-    @RequestMapping("/")
+    @RequestMapping("")
     public String list(Model model) {
         logger.info("list start: ");
         model.addAttribute("pageTitle", "Iot Admin");
@@ -59,6 +59,7 @@ public class ProductController {
         
         model.addAttribute("pagerTag", pageTag);
         model.addAttribute("list", dvcInfos.getContent());
+        request.setAttribute("camel", "blue night");
         System.out.println(pageTag);
 //        return new ResponseEntity<>(dvcInfos, HttpStatus.OK);
         return "pgprod";
