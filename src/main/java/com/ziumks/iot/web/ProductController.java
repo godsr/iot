@@ -52,8 +52,7 @@ public class ProductController {
         Page<DvcInfo> dvcInfos = repository.findAll(pageable);
         model.addAttribute("pageTitle", "Iot Admin");
         model.addAttribute("pageSubTitle", "tipa site 관리");
-        
-        
+
         
         String pageTag = PagerTag.by(dvcInfos, request.getRequestURI());
         
