@@ -53,14 +53,14 @@ var App = function () {
                 totalHeight += $this.find('.' + navSubmenuClass).filter(':visible').outerHeight();
                 if($this.children('.' + navSubmenuClass).length) {
                     if(($this.children('.' + navSubmenuClass).offset().top + $this.find('.' + navSubmenuClass).filter(':visible').outerHeight()) > document.body.clientHeight) {
-                        $this.addClass(navSubmenuReversedClass)
+                        $this.addClass(navSubmenuReversedClass);
                     }
                     else {
-                        $this.removeClass(navSubmenuReversedClass)
+                        $this.removeClass(navSubmenuReversedClass);
                     }
                 }
             });
-        }
+        };
 
         // If sidebar is resized by default
         if($('body').hasClass('sidebar-xs')) {
@@ -70,7 +70,17 @@ var App = function () {
         // Toggle min sidebar class
         $('.sidebar-main-toggle').on('click', function (e) {
             e.preventDefault();
-
+            // @baltop
+            console.log('save start');
+            if( $('body').hasClass('sidebar-xs') ) {
+            	console.log('save has');
+            	localStorage.setItem('sidebar', 'has');
+            }
+            else {
+            	console.log('save no');
+            	localStorage.setItem('sidebar', 'no');
+            }
+            // --@baltop
             $('body').toggleClass('sidebar-xs').removeClass('sidebar-mobile-main');
             revertBottomMenus();
         });
@@ -180,7 +190,7 @@ var App = function () {
         $('.sidebar-mobile-expand').on('click', function (e) {
             e.preventDefault();
             var $sidebar = $(this).parents('.sidebar'),
-                sidebarFullscreenClass = 'sidebar-fullscreen'
+                sidebarFullscreenClass = 'sidebar-fullscreen';
 
             if(!$sidebar.hasClass(sidebarFullscreenClass)) {
                 $sidebar.addClass(sidebarFullscreenClass);
@@ -556,7 +566,7 @@ var App = function () {
             App.initDropdownSubmenu();
             App.initHeaderElementsToggle();
         }
-    }
+    };
 }();
 
 
@@ -566,6 +576,16 @@ var App = function () {
 // When content is loaded
 document.addEventListener('DOMContentLoaded', function() {
     App.initBeforeLoad();
+    // @baltop
+	if(localStorage.getItem('sidebar') == 'has'){
+		console.log('start side on');
+		$('body').removeClass('sidebar-xs');
+	}
+	else {
+		console.log('start side ooff');
+		$('body').addClass('sidebar-xs');
+	}
+    // --@baltop
     App.initCore();
 });
 
