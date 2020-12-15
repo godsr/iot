@@ -38,7 +38,7 @@ public class ProductController {
     
 
 
-    @RequestMapping("/")
+    @RequestMapping("")
     public String list(Model model) {
         logger.info("list start: ");
         model.addAttribute("pageTitle", "Iot Admin");
