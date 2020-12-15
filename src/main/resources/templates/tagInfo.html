@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+{{>layout/head}}
+</head>
+<body>
+
+{{>layout/mainslider}}
+
+
+
+
+
+
+<!-- Content area -->
+<div class="content">
+
+
+
+    <!-- Basic card -->
+		<div class="card">
+			<div class="card-header header-elements-inline">
+				<h5 class="card-title">Basic card</h5>
+				<div class="header-elements">
+					<div class="list-icons">
+						<a class="list-icons-item" data-action="collapse"></a> <a
+							class="list-icons-item" data-action="reload"></a> <a
+							class="list-icons-item" data-action="remove"></a>
+					</div>
+				</div>
+			</div>
+
+			<div
+				class="card-body d-sm-flex align-items-sm-center justify-content-sm-between">
+				<div class="col-md- 10">
+					<input type="text" class="form-control" id="search"
+						placeholder="고객 이름을 입력하세요!">
+				</div>
+				<div>
+					<a href="#" class="btn bg-indigo-300"><i
+						class="icon-statistics mr-2" onclick="javascript:create_click(this);" ></i>태그 등록</a>
+				</div>
+
+				</div>
+				
+
+				<div id="DataTables_Table_0_wrapper"
+					class="dataTables_wrapper no-footer">
+
+					<div class="card">
+						<div class="card-header header-elements-inline">
+							<h5 class="card-title">태그 정보 관리</h5>
+							<div class="header-elements">
+								<div class="list-icons">
+									<a class="list-icons-item" data-action="collapse"></a> <a
+										class="list-icons-item" data-action="reload"></a> <a
+										class="list-icons-item" data-action="remove"></a>
+								</div>
+							</div>
+						</div>
+
+						<div class="table-responsive">
+							<table class="table">
+								<thead>
+									<tr>
+										<th><strong>운영사</strong></th>
+										<th><strong>현장</strong></th>
+										<th><strong>태그 유형</strong></th>
+										<th><strong>태그 단위</strong></th>
+										<th><strong>태그 코드</strong></th>
+										<th><strong>태그명</strong></th>
+										<th><strong>생성일자</strong></th>
+									</tr>
+								</thead>
+								<tbody>
+									{{#list}}
+									<tr role="row" class="odd" id={{tagId}}
+										onclick="javascript:card_click(this);">
+										<td tabindex="0" class="sorting_1" style="">{{clientCd}}</td>
+										<td style="">{{siteCd}}</td>
+										<td style="">{{tagTypeNm}}</td>
+										<td style="">{{tagUnitNm}}</td>
+										<td style="">{{tagCd}}</td>
+										<td style="">{{tagNm}}</td>
+										<td style="">{{creDtm}}</td>
+									</tr>
+									{{/list}}
+								</tbody>
+							</table>
+						</div>
+							{{{pagerTag}}}
+					</div>
+				
+			</div>
+			<!-- /basic table -->
+			
+			<div id="myModal" class="modal fade" tabindex="-1">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title">사용자 정보</h5>
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+							</div>
+
+							<div class="modal-body">
+								<div class="form-group row">
+									<label class="col-form-label col-lg-2">운영사</label>
+									<div class="col-lg-10">
+										<input type="text" class="form-control"
+											placeholder="Enter your userId..." id="clientCd"
+											disabled="disabled">
+									</div>
+								</div>
+							</div>
+
+							<div class="modal-body">
+								<div class="form-group row">
+									<label class="col-form-label col-lg-2">현장</label>
+									<div class="col-lg-10">
+										<input type="text" class="form-control"
+											placeholder="Enter your userId..." id="siteCd"
+											disabled="disabled">
+									</div>
+								</div>
+							</div>
+
+							<div class="modal-body">
+								<div class="form-group row">
+									<label class="col-form-label col-lg-2">태그 유형</label>
+									<div class="col-lg-10">
+										<input type="text" class="form-control"
+											placeholder="Enter your userId..." id="tagTypeNm"
+											disabled="disabled">
+									</div>
+								</div>
+							</div>
+
+							<div class="modal-body">
+								<div class="form-group row">
+									<label class="col-form-label col-lg-2">태그 단위</label>
+									<div class="col-lg-10">
+										<input type="text" class="form-control"
+											placeholder="Enter your userId..." id="tagUnitNm"
+											disabled="disabled">
+									</div>
+								</div>
+							</div>
+
+							<div class="modal-body">
+								<div class="form-group row">
+									<label class="col-form-label col-lg-2">태그 코드</label>
+									<div class="col-lg-10">
+										<input type="text" class="form-control"
+											placeholder="Enter your userId..." id="tagCd"
+											disabled="disabled">
+									</div>
+								</div>
+							</div>
+
+							<div class="modal-body">
+								<div class="form-group row">
+									<label class="col-form-label col-lg-2">태그명</label>
+									<div class="col-lg-10">
+										<input type="text" class="form-control"
+											placeholder="Enter your userId..." id="tagNm">
+									</div>
+								</div>
+							</div>
+
+							<div class="modal-body">
+								<div class="form-group row">
+									<label class="col-form-label col-lg-2">생성일자</label>
+									<div class="col-lg-10">
+										<input type="text" class="form-control"
+											placeholder="Enter your userId..." id="creDtm"
+											disabled="disabled">
+									</div>
+								</div>
+							</div>
+							
+							<input type="hidden" class="form-control"
+											placeholder="Enter your userId..." id="tagId"
+											disabled="disabled">
+
+							<div class="modal-footer">
+								<button type="button" class="btn btn-link" data-dismiss="modal">닫기</button>
+								<button type="button" class="btn bg-primary"
+									onclick="javascript:save_click(this);">저장 및 변경</button>
+								<button type="button" class="btn bg-warning"
+									onclick="javascript:delete_click(this);">삭제</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- modal -->
+		</div>
+		<!-- /basic card -->
+
+
+</div>
+<!-- /content area -->
+
+
+
+<script>
+	$(document).ready(function() {
+
+		$("#sebtn").click(function() {
+			console.log("save click!!!");
+			location.href = "/prod/plist?page=1&size=10&sort=dvcId,asc";
+		});
+
+	});
+	
+</script>
+<script type="text/javascript">
+
+	function card_click(obj) {
+
+		console.log(obj);
+		console.log(obj.id);
+
+		$.ajax({
+			type : "GET",
+			url : "/taginfo/" + obj.id,
+			dataType : "json", 
+			error : function(e) {
+				console.log("전송 실패");
+				console.log(e);
+			},
+			success : function(obj) {
+
+				console.log("전송 성공");
+				console.log(obj);
+
+				$('#myModal').modal('show');
+
+				$('#clientCd').val(obj.clientCd);
+				$('#siteCd').val(obj.siteCd);
+				$('#tagTypeNm').val(obj.tagTypeNm);
+				$('#tagUnitNm').val(obj.tagUnitNm);
+				$('#tagNm').val(obj.tagNm);
+				$('#tagCd').val(obj.tagCd);
+				$('#creDtm').val(obj.creDtm);
+				$('#tagId').val(obj.tagId);
+			
+			}
+		});
+	};
+
+	function save_click(obj) {
+
+		var tagInfo = {
+			 clientCd : $("#clientCd").val(),
+			 siteCd : $("#siteCd").val(),
+			 tagTypeNm : $("#tagTypeNm").val(),
+			 tagUnitNm : $("#tagUnitNm").val(),
+			 tagNm : $("#tagNm").val(),
+			 tagCd : $("#tagCd").val(),
+			 creDtm : $("#creDtm").val(),
+			 tagId : $("#tagId").val()
+		}
+
+		console.log(tagInfo);
+
+		$.ajax({
+			type : "POST",
+			url : "/taginfo/save/",
+			dataType : "text",
+			data : JSON.stringify(tagInfo),
+			contentType : "application/json; charset=UTF-8",
+			error : function(e) {
+				console.log("전송 실패");
+				console.log(e);
+			},
+			success : function(obj) {
+				alert('저장되었습니다.');
+			}
+		});
+	};
+	
+	function delete_click(obj) {
+		
+		var tagInfo = obj;
+		
+		console.log(tagInfo);
+		
+		if(confirm('태그 정보가 삭제됩니다.')) {
+			
+			$.ajax({
+				type : "DELETE",
+				url : "/taginfo/delete/",
+				dataType : "text",
+				data : JSON.stringify(tagInfo),
+				contentType : "application/json; charset=UTF-8",
+				error : function(e) {
+					console.log("삭제 실패");
+					console.log(e);
+				},
+				success : function(response) {
+					alert('삭제 되었습니다.');
+					$('#myModal').modal('hide');
+					window.location.href = "/taginfo/";
+				}
+			});
+			return ;
+		} else {
+			return false;
+		}
+	};
+
+	function create_click(){
+		
+		$.ajax({
+			
+		})
+	}
+</script>
+
+
+
+
+	{{>layout/footer}}
+
+</body>
+</html>
