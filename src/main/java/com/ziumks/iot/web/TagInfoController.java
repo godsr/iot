@@ -73,7 +73,7 @@ public class TagInfoController {
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String updateTagInfo(@RequestBody TagInfo tagInfo) {
     	System.out.println(tagInfo);
-    	repository.save(tagInfo);
+    	repository.tagInfoUpdate(tagInfo);
     	return "save success";
     }
     
@@ -84,4 +84,6 @@ public class TagInfoController {
     	repository.delete(tagInfo);
     	return "delete success";
     }
+    
+    
 }

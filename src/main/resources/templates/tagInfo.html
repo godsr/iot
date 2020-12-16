@@ -20,79 +20,74 @@
     <!-- Basic card -->
 		<div class="card">
 			<div class="card-header header-elements-inline">
-				<h5 class="card-title">Basic card</h5>
-				<div class="header-elements">
-					<div class="list-icons">
-						<a class="list-icons-item" data-action="collapse"></a> <a
-							class="list-icons-item" data-action="reload"></a> <a
-							class="list-icons-item" data-action="remove"></a>
-					</div>
-				</div>
+				<h5 class="card-title">태그 정보 관리</h5>
+
 			</div>
 
 			<div
 				class="card-body d-sm-flex align-items-sm-center justify-content-sm-between">
 				<div class="col-md- 10">
 					<input type="text" class="form-control" id="search"
-						placeholder="고객 이름을 입력하세요!">
+						placeholder="태그명을 입력하세요!">
+				
 				</div>
+
 				<div>
-					<a href="#" class="btn bg-indigo-300"><i
-						class="icon-statistics mr-2" onclick="javascript:create_click(this);" ></i>태그 등록</a>
+					<a href="#" class="btn bg-warning-300"><i
+						class="icon-statistics mr-2"
+						onclick=""></i>검색</a>
 				</div>
 
-				</div>
-				
+			</div>
 
-				<div id="DataTables_Table_0_wrapper"
-					class="dataTables_wrapper no-footer">
 
-					<div class="card">
-						<div class="card-header header-elements-inline">
-							<h5 class="card-title">태그 정보 관리</h5>
-							<div class="header-elements">
-								<div class="list-icons">
-									<a class="list-icons-item" data-action="collapse"></a> <a
-										class="list-icons-item" data-action="reload"></a> <a
-										class="list-icons-item" data-action="remove"></a>
-								</div>
-							</div>
+			<div id="DataTables_Table_0_wrapper"
+				class="dataTables_wrapper no-footer">
+
+				<div class="card">
+					<div class="card-header header-elements-inline" style="text-align: right">
+
+						<div>
+							<a href="#" class="btn bg-indigo-300"><i
+								class="icon-statistics mr-2" 
+								onclick="javascript:create_click(this);"></i>태그 등록</a>
 						</div>
-
-						<div class="table-responsive">
-							<table class="table">
-								<thead>
-									<tr>
-										<th><strong>운영사</strong></th>
-										<th><strong>현장</strong></th>
-										<th><strong>태그 유형</strong></th>
-										<th><strong>태그 단위</strong></th>
-										<th><strong>태그 코드</strong></th>
-										<th><strong>태그명</strong></th>
-										<th><strong>생성일자</strong></th>
-									</tr>
-								</thead>
-								<tbody>
-									{{#list}}
-									<tr role="row" class="odd" id={{tagId}}
-										onclick="javascript:card_click(this);">
-										<td tabindex="0" class="sorting_1" style="">{{clientCd}}</td>
-										<td style="">{{siteCd}}</td>
-										<td style="">{{tagTypeNm}}</td>
-										<td style="">{{tagUnitNm}}</td>
-										<td style="">{{tagCd}}</td>
-										<td style="">{{tagNm}}</td>
-										<td style="">{{creDtm}}</td>
-									</tr>
-									{{/list}}
-								</tbody>
-							</table>
-						</div>
-							{{{pagerTag}}}
 					</div>
-				
+
+					<div class="table-responsive">
+						<table class="table">
+							<thead>
+								<tr>
+									<th><strong>운영사</strong></th>
+									<th><strong>현장</strong></th>
+									<th><strong>태그 유형</strong></th>
+									<th><strong>태그 단위</strong></th>
+									<th><strong>태그 코드</strong></th>
+									<th><strong>태그명</strong></th>
+									<th><strong>생성일자</strong></th>
+								</tr>
+							</thead>
+							<tbody>
+								{{#list}}
+								<tr role="row" class="odd" id={{tagId}}
+									onclick="javascript:card_click(this);">
+									<td tabindex="0" class="sorting_1" style="">{{clientCd}}</td>
+									<td style="">{{siteCd}}</td>
+									<td style="">{{tagTypeNm}}</td>
+									<td style="">{{tagUnitNm}}</td>
+									<td style="">{{tagCd}}</td>
+									<td style="">{{tagNm}}</td>
+									<td style="">{{creDtm}}</td>
+								</tr>
+								{{/list}}
+							</tbody>
+						</table>
+					</div>
+				</div>
+
 			</div>
 			<!-- /basic table -->
+
 			
 			<div id="myModal" class="modal fade" tabindex="-1">
 					<div class="modal-dialog">
@@ -182,12 +177,32 @@
 											placeholder="Enter your userId..." id="tagId"
 											disabled="disabled">
 
+							<input type="hidden" class="form-control"
+											placeholder="Enter your userId..." id="creMn"
+											disabled="disabled">
+
+							<input type="hidden" class="form-control"
+											placeholder="Enter your userId..." id="tag_type"
+											disabled="disabled">
+
+							<input type="hidden" class="form-control"
+											placeholder="Enter your userId..." id="upd_dtm"
+											disabled="disabled">
+
+							<input type="hidden" class="form-control"
+											placeholder="Enter your userId..." id="updmn"
+											disabled="disabled">
+
+							<input type="hidden" class="form-control"
+											placeholder="Enter your userId..." id="tag_unit"
+											disabled="disabled">
+
 							<div class="modal-footer">
 								<button type="button" class="btn btn-link" data-dismiss="modal">닫기</button>
 								<button type="button" class="btn bg-primary"
 									onclick="javascript:save_click(this);">저장 및 변경</button>
 								<button type="button" class="btn bg-warning"
-									onclick="javascript:delete_click(this);">삭제</button>
+									onclick="javascript:delete_click();">삭제</button>
 							</div>
 						</div>
 					</div>
@@ -195,24 +210,16 @@
 				<!-- modal -->
 		</div>
 		<!-- /basic card -->
-
-
+		<div class="col-lg-12">
+			<div class="card card-body border-top-teal text-center">
+				<ul class="pagination pagination-flat align-self-center">
+					{{{pagerTag}}}
+				</ul>
+			</div>
+		</div>
 </div>
 <!-- /content area -->
 
-
-
-<script>
-	$(document).ready(function() {
-
-		$("#sebtn").click(function() {
-			console.log("save click!!!");
-			location.href = "/prod/plist?page=1&size=10&sort=dvcId,asc";
-		});
-
-	});
-	
-</script>
 <script type="text/javascript">
 
 	function card_click(obj) {
@@ -258,7 +265,8 @@
 			 tagNm : $("#tagNm").val(),
 			 tagCd : $("#tagCd").val(),
 			 creDtm : $("#creDtm").val(),
-			 tagId : $("#tagId").val()
+			 tagId : $("#tagId").val(),
+
 		}
 
 		console.log(tagInfo);
