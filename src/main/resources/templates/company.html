@@ -21,11 +21,7 @@
 			<div class="card-header header-elements-inline">
 				<h5 class="card-title">업체관리{{htmlzium}}</h5>
 				<div class="header-elements">
-					<div class="list-icons">
-						<a class="list-icons-item" data-action="collapse"></a> <a
-							class="list-icons-item" data-action="reload"></a> <a
-							class="list-icons-item" data-action="remove"></a>
-					</div>
+					<button type="submit" class="btn bg-primary" data-toggle="modal" data-target="#modal_create">New</button>
 				</div>
 			</div>
 
@@ -36,15 +32,13 @@
 					<table class="table">
 						<thead>
 							<tr>
-								<th>client</th>
-								<th>site</th>
-								<th>company</th>
-								<th>type</th>
-								<th>tel</th>
-								<th>address</th>
-								<th>manager</th>
-								<th>phone</th>
-								<th>email</th>
+								<th>Client</th>
+								<th>Site</th>
+								<th>Company</th>
+								<th>Type</th>
+								<th>Manager</th>
+								<th>Phone</th>
+								<th>Email</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -55,8 +49,6 @@
 								<td>{{siteCd}}</td>
 								<td>{{coNm}}</td>
 								<td>{{coType}}</td>
-								<td>{{coPhone}}</td>
-								<td>{{coAddr}}</td>
 								<td>{{coMngr}}</td>
 								<td>{{coMngrPhone}}</td>
 								<td>{{coMngrEmail}}</td>
@@ -77,7 +69,98 @@
 		</div>
 		<!-- /basic card -->
 		
-		<!-- Vertical form modal -->
+		<!-- create form modal -->
+				<div id="modal_create" class="modal fade" tabindex="-1">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title">업체 상세 정보</h5>
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+							</div>
+
+							<form action="#">
+								<div class="modal-body">
+									<div class="form-group">
+										<div class="row">
+											<div class="col-sm-6">
+												<input type="hidden" id="coId">
+												<input type="hidden" id="creDtm">
+												<input type="hidden" id="updDtm">
+												<input type="hidden" id="regrt">
+												<input type="hidden" id="use_yn">
+												<label>client</label>
+												<input type="text" placeholder="client" class="form-control" id="clientCd_">
+											</div>
+
+											<div class="col-sm-6">
+												<label>site</label>
+												<input type="text" placeholder="site" class="form-control" id="siteCd_">
+											</div>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<div class="row">
+											<div class="col-sm-4">
+												<label>company</label>
+												<input type="text" placeholder="company" class="form-control" id="coNm_">
+											</div>
+
+											<div class="col-sm-4">
+												<label>type</label>
+												<input type="text" placeholder="type" class="form-control" id="coType_">
+											</div>
+											
+											<div class="col-sm-4">
+												<label>tel</label>
+												<input type="text" placeholder="please not hyphen" class="form-control" id="coPhone_">
+											</div>
+										</div>
+									</div>
+									
+									<div class="form-group">
+										<div class="row">
+											<div class="col-sm-12">
+												<label>address</label>
+												<input type="text" placeholder="address" class="form-control" id="coAddr_">
+											</div>
+										</div>
+									</div>
+									
+									<div class="form-group">
+										<div class="row">
+											<div class="col-sm-12">
+												<label>manager</label>
+												<input type="text" placeholder="manager" class="form-control" id="coMngr_">
+											</div>
+										</div>
+									</div>
+									
+									<div class="form-group">
+										<div class="row">
+											<div class="col-sm-12">
+												<label>phone</label>
+												<input type="text" placeholder="please not hyphen" class="form-control" id="coMngrPhone_">
+											</div>
+											<div class="col-sm-12">
+												<label>email</label>
+												<input type="text" placeholder="manager email" class="form-control" id="coMngrEmail_">
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="modal-footer">
+									<button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
+									<button type="submit" class="btn bg-primary" onclick="javascript:save_click(this);">Save</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+				<!-- /create form modal -->
+		
+		<!-- update form modal -->
 				<div id="modal_default" class="modal fade" tabindex="-1">
 					<div class="modal-dialog">
 						<div class="modal-content">
@@ -109,26 +192,26 @@
 
 									<div class="form-group">
 										<div class="row">
-											<div class="col-sm-6">
+											<div class="col-sm-4">
 												<label>company</label>
 												<input type="text" placeholder="company" class="form-control" id="coNm">
 											</div>
 
-											<div class="col-sm-6">
+											<div class="col-sm-4">
 												<label>type</label>
 												<input type="text" placeholder="type" class="form-control" id="coType">
+											</div>
+											
+											<div class="col-sm-4">
+												<label>tel</label>
+												<input type="text" placeholder="please not hyphen" class="form-control" id="coPhone">
 											</div>
 										</div>
 									</div>
 									
 									<div class="form-group">
 										<div class="row">
-											<div class="col-sm-6">
-												<label>tel</label>
-												<input type="text" placeholder="tel" class="form-control" id="coPhone">
-											</div>
-
-											<div class="col-sm-6">
+											<div class="col-sm-12">
 												<label>address</label>
 												<input type="text" placeholder="address" class="form-control" id="coAddr">
 											</div>
@@ -137,19 +220,22 @@
 									
 									<div class="form-group">
 										<div class="row">
-											<div class="col-sm-4">
+											<div class="col-sm-12">
 												<label>manager</label>
 												<input type="text" placeholder="manager" class="form-control" id=coMngr>
 											</div>
-
-											<div class="col-sm-4">
+										</div>
+									</div>
+									
+									<div class="form-group">
+										<div class="row">
+											<div class="col-sm-12">
+												<label>phone</label>
+												<input type="text" placeholder="please not hyphen" class="form-control" id=coMngrPhone>
+											</div>
+											<div class="col-sm-12">
 												<label>email</label>
 												<input type="text" placeholder="manager email" class="form-control" id=coMngrEmail>
-											</div>
-
-											<div class="col-sm-4">
-												<label>phone</label>
-												<input type="text" placeholder="manager phone" class="form-control" id=coMngrPhone>
 											</div>
 										</div>
 									</div>
@@ -164,7 +250,7 @@
 						</div>
 					</div>
 				</div>
-				<!-- /vertical form modal -->
+				<!-- /update form modal -->
 				
 	</div>
 	<!-- /content area -->
@@ -173,7 +259,6 @@
 
 	<script>
 	function card_click(obj) {
-		$(document).ready(function() {
 
 			$.ajax({
 				type : "GET",
@@ -207,7 +292,7 @@
 					
 				}
 			});
-		});
+
 	};
 	
 	function save_click(obj){
@@ -265,7 +350,42 @@
 						}
 					});
 				};
-				
+ 
+	function new_save_click(obj){
+					
+					var comp = {
+							coId: $("#coId").val(),
+							clientCd: $("#clientCd").val(),
+							siteCd: $("#siteCd").val(),
+							coNm: $("#coNm").val(),
+							coType: $("#coType").val(),
+							coPhone: $("#coPhone").val(),
+							coAddr: $("#coAddr").val(),
+							coMngr: $("#coMngr").val(),
+							coMngrPhone: $("#coMngrPhone").val(),
+							coMngrEmail: $("#coMngrEmail").val(),
+							creDtm: $("#creDtm").val(),
+							updDtm: $("#updDtm").val(),
+							regrt: $("#regrt").val(),
+							use_yn: $("#use_yn").val()
+
+					}
+					$.ajax({
+						type : "POST",
+						url : "/comp/update/",
+						dataType : "text",
+						contentType: "application/json",
+						data : JSON.stringify(comp),
+						success : function(obj){
+							alert('저장되었습니다.');
+						},
+						error : function(e) {
+							console.log("전송 실패");
+							console.log(e);
+						}
+					});
+				};					
+							
 				
 	</script>
 
