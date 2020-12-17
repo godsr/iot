@@ -31,7 +31,6 @@ public class CompanyInfo  implements Serializable {
 
     @Id
     @Column(name = "co_id", length = 255)
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private String coId;
 
     @Column(name = "co_nm", length = 255)
