@@ -83,11 +83,11 @@
 									<div class="form-group">
 										<div class="row">
 											<div class="col-sm-6">
-												<input type="hidden" id="coId">
-												<input type="hidden" id="creDtm">
-												<input type="hidden" id="updDtm">
-												<input type="hidden" id="regrt">
-												<input type="hidden" id="use_yn">
+												<input type="hidden" id="coId_">
+												<input type="hidden" id="creDtm_">
+												<input type="hidden" id="updDtm_">
+												<input type="hidden" id="regrt_" value="User Id">
+												<input type="hidden" id="use_yn_" value="true">
 												<label>client</label>
 												<input type="text" placeholder="client" class="form-control" id="clientCd_">
 											</div>
@@ -152,7 +152,7 @@
 
 								<div class="modal-footer">
 									<button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
-									<button type="submit" class="btn bg-primary" onclick="javascript:save_click(this);">Save</button>
+									<button type="submit" class="btn bg-primary" onclick="javascript:new_save_click(this);">Save</button>
 								</div>
 							</form>
 						</div>
@@ -354,20 +354,20 @@
 	function new_save_click(obj){
 					
 					var comp = {
-							coId: $("#coId").val(),
-							clientCd: $("#clientCd").val(),
-							siteCd: $("#siteCd").val(),
-							coNm: $("#coNm").val(),
-							coType: $("#coType").val(),
-							coPhone: $("#coPhone").val(),
-							coAddr: $("#coAddr").val(),
-							coMngr: $("#coMngr").val(),
-							coMngrPhone: $("#coMngrPhone").val(),
-							coMngrEmail: $("#coMngrEmail").val(),
-							creDtm: $("#creDtm").val(),
-							updDtm: $("#updDtm").val(),
-							regrt: $("#regrt").val(),
-							use_yn: $("#use_yn").val()
+							coId: $("#coId_").val(),
+							clientCd: $("#clientCd_").val(),
+							siteCd: $("#siteCd_").val(),
+							coNm: $("#coNm_").val(),
+							coType: $("#coType_").val(),
+							coPhone: $("#coPhone_").val(),
+							coAddr: $("#coAddr_").val(),
+							coMngr: $("#coMngr_").val(),
+							coMngrPhone: $("#coMngrPhone_").val(),
+							coMngrEmail: $("#coMngrEmail_").val(),
+							creDtm: $("#creDtm_").val(),
+							updDtm: $("#updDtm_").val(),
+							regrt: $("#regrt_").val(),
+							use_yn: $("#use_yn_").val()
 
 					}
 					$.ajax({

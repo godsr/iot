@@ -79,4 +79,10 @@ public class CompanyController {
 		
 		repository.deleteByCoId(coId);
 	}
+	@ResponseBody
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	public ResponseEntity<String> insert(@RequestBody CompanyInfo companyInfo) {
+		companyInfo = repository.save(companyInfo);
+		return new ResponseEntity<String>("success", HttpStatus.OK);
+	}
 }
