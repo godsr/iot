@@ -1,6 +1,7 @@
 package com.ziumks.iot.web;
 
 import java.util.Optional;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -19,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.ziumks.iot.domain.Author;
 import com.ziumks.iot.domain.TagInfo;
 import com.ziumks.iot.repository.TagInfoRepository;
 
@@ -65,6 +65,7 @@ public class TagInfoController {
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public String createTagInfo(@RequestBody TagInfo tagInfo) {
     	System.out.println(tagInfo);
+    	tagInfo.setTagId(UUID.randomUUID().toString().replaceAll("-", ""));
     	repository.save(tagInfo);
     	return "create success";
     }
@@ -73,7 +74,8 @@ public class TagInfoController {
     @RequestMapping(value = "/save", method = RequestMethod.PUT)
     public String updateTagInfo(@RequestBody TagInfo tagInfo) {
     	System.out.println(tagInfo);
-    	repository.tagInfoUpdate(tagInfo);
+//    	repository.tagInfoUpdate(tagInfo);
+    	repository.save(tagInfo);
     	return "save success";
     }
     

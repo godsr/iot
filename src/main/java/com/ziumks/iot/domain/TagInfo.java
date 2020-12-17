@@ -11,6 +11,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import com.ziumks.iot.config.CommonCode;
 import com.ziumks.iot.domain.view.ClientSiteView;
+
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.Formula;
 import org.springframework.data.annotation.Persistent;
 
@@ -63,26 +65,26 @@ public class TagInfo implements Serializable {
 	@Column(name="site_cd", length=32 )
 	private String siteCd;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumns(value = {
-			@JoinColumn(name = "client_cd", referencedColumnName = "client_cd", updatable = false, insertable = false),
-			@JoinColumn(name = "site_cd", referencedColumnName = "site_cd", updatable = false, insertable = false)
-	})
-	@Embedded
-	private ClientSiteView clientSiteView;
+//	@ManyToOne(fetch = FetchType.LAZY)
+//	@JoinColumns(value = {
+//			@JoinColumn(name = "client_cd", referencedColumnName = "client_cd", updatable = false, insertable = false),
+//			@JoinColumn(name = "site_cd", referencedColumnName = "site_cd", updatable = false, insertable = false)
+//	})
+//	@Embedded
+//	private ClientSiteView clientSiteView;
 
-	public ClientSiteView getClientSiteView() {
-		return clientSiteView;
-	}
+//	public ClientSiteView getClientSiteView() {
+//		return clientSiteView;
+//	}
 
-	public void setClientSiteView(ClientSiteView clientSiteView) {
-		this.clientSiteView = clientSiteView;
-	}
+//	public void setClientSiteView(ClientSiteView clientSiteView) {
+//		this.clientSiteView = clientSiteView;
+//	}
 
-	@JsonIgnore
-	@OneToMany(mappedBy="tagInfo" , fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<TagModelMappInfo> dvcModelMappInfos;
-	
+//	@JsonIgnore
+//	@OneToMany(mappedBy="tagInfo" , fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//	private List<TagModelMappInfo> dvcModelMappInfos;
+//	
 	@Transient
 	private String creDtmView;
 	
@@ -145,13 +147,13 @@ public class TagInfo implements Serializable {
 		this.updDtm = updDtm;
 	}
 
-	public List<TagModelMappInfo> getDvcModelMappInfos() {
-		return dvcModelMappInfos;
-	}
-
-	public void setDvcModelMappInfos(List<TagModelMappInfo> dvcModelMappInfos) {
-		this.dvcModelMappInfos = dvcModelMappInfos;
-	}
+//	public List<TagModelMappInfo> getDvcModelMappInfos() {
+//		return dvcModelMappInfos;
+//	}
+//
+//	public void setDvcModelMappInfos(List<TagModelMappInfo> dvcModelMappInfos) {
+//		this.dvcModelMappInfos = dvcModelMappInfos;
+//	}
 
 	public String getTagId() {
 		return tagId;
