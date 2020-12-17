@@ -61,16 +61,16 @@ public class TagInfoController {
     	return tagInfo;
     }
     
-    
     @ResponseBody
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public String createTagInfo(@RequestBody TagInfo tagInfo) {
-    	
+    	System.out.println(tagInfo);
+    	repository.save(tagInfo);
     	return "create success";
     }
     
     @ResponseBody
-    @RequestMapping(value = "/save", method = RequestMethod.POST)
+    @RequestMapping(value = "/save", method = RequestMethod.PUT)
     public String updateTagInfo(@RequestBody TagInfo tagInfo) {
     	System.out.println(tagInfo);
     	repository.tagInfoUpdate(tagInfo);

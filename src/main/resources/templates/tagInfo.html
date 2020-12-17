@@ -47,10 +47,9 @@
 				<div class="card">
 					<div class="card-header header-elements-inline" style="text-align: right">
 
-						<div>
+						<div onclick="javascript:open_postModal();">
 							<a href="#" class="btn bg-indigo-300"><i
-								class="icon-statistics mr-2" 
-								onclick="javascript:create_click(this);"></i>태그 등록</a>
+								class="icon-statistics mr-2" ></i>태그 등록</a>
 						</div>
 					</div>
 
@@ -182,19 +181,19 @@
 											disabled="disabled">
 
 							<input type="hidden" class="form-control"
-											placeholder="Enter your userId..." id="tag_type"
+											placeholder="Enter your userId..." id="tagType"
 											disabled="disabled">
 
 							<input type="hidden" class="form-control"
-											placeholder="Enter your userId..." id="upd_dtm"
+											placeholder="Enter your userId..." id="updDtm"
 											disabled="disabled">
 
 							<input type="hidden" class="form-control"
-											placeholder="Enter your userId..." id="updmn"
+											placeholder="Enter your userId..." id="updMn"
 											disabled="disabled">
 
 							<input type="hidden" class="form-control"
-											placeholder="Enter your userId..." id="tag_unit"
+											placeholder="Enter your userId..." id="tagUnit"
 											disabled="disabled">
 
 							<div class="modal-footer">
@@ -203,6 +202,119 @@
 									onclick="javascript:save_click(this);">저장 및 변경</button>
 								<button type="button" class="btn bg-warning"
 									onclick="javascript:delete_click();">삭제</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- modal -->
+			<div id="postModal" class="modal fade" tabindex="-1">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title">사용자 정보</h5>
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+							</div>
+
+							<div class="modal-body">
+								<div class="form-group row">
+									<label class="col-form-label col-lg-2">운영사</label>
+									<div class="col-lg-10">
+										<input type="text" class="form-control"
+											placeholder="Enter your userId..." id="clientCdPost">
+									</div>
+								</div>
+							</div>
+
+							<div class="modal-body">
+								<div class="form-group row">
+									<label class="col-form-label col-lg-2">현장</label>
+									<div class="col-lg-10">
+										<input type="text" class="form-control"
+											placeholder="Enter your userId..." id="siteCdPost">
+									</div>
+								</div>
+							</div>
+
+							<div class="modal-body">
+								<div class="form-group row">
+									<label class="col-form-label col-lg-2">태그 유형</label>
+									<div class="col-lg-10">
+										<input type="text" class="form-control"
+											placeholder="Enter your userId..." id="tagTypeNmPost">
+									</div>
+								</div>
+							</div>
+
+							<div class="modal-body">
+								<div class="form-group row">
+									<label class="col-form-label col-lg-2">태그 단위</label>
+									<div class="form-group row col-lg-10">
+										<input type="text" class="form-control"
+											placeholder="Enter your userId..." id="tagUnitNmPost">
+										<span tabindex="0" id="ui-id-9-button" role="combobox"
+											aria-expanded="true" aria-autocomplete="list"
+											aria-owns="ui-id-9-menu" aria-haspopup="true"
+											class="ui-selectmenu-button ui-button ui-widget ui-selectmenu-button-open ui-corner-top col-lg-8"
+											aria-activedescendant="ui-id-10" aria-labelledby="ui-id-14"
+											aria-disabled="false" style="width: 100%;"><span
+											class="ui-selectmenu-icon ui-icon ui-icon-triangle-1-s"></span><span
+											class="ui-selectmenu-text">Alabama</span></span>
+									</div>
+								</div>
+							</div>
+
+							<div class="modal-body">
+								<div class="form-group row">
+									<label class="col-form-label col-lg-2">태그 코드</label>
+									<div class="col-lg-10">
+										<input type="text" class="form-control"
+											placeholder="Enter your userId..." id="tagCdPost">
+									</div>
+								</div>
+							</div>
+
+							<div class="modal-body">
+								<div class="form-group row">
+									<label class="col-form-label col-lg-2">태그명</label>
+									<div class="col-lg-10">
+										<input type="text" class="form-control"
+											placeholder="Enter your userId..." id="tagNmPost">
+									</div>
+								</div>
+							</div>
+
+							<input type="hidden" class="form-control"
+											placeholder="Enter your userId..." id="creDtmPost"
+											disabled="disabled">
+							
+							<input type="hidden" class="form-control"
+											placeholder="Enter your userId..." id="tagIdPost"
+											disabled="disabled">
+
+							<input type="hidden" class="form-control"
+											placeholder="Enter your userId..." id="creMnPost"
+											disabled="disabled">
+
+							<input type="hidden" class="form-control"
+											placeholder="Enter your userId..." id="tagTypePost"
+											disabled="disabled">
+
+							<input type="hidden" class="form-control"
+											placeholder="Enter your userId..." id="updDtmPost"
+											disabled="disabled">
+
+							<input type="hidden" class="form-control"
+											placeholder="Enter your userId..." id="updMnPost"
+											disabled="disabled">
+
+							<input type="hidden" class="form-control"
+											placeholder="Enter your userId..." id="tagUnitPost"
+											disabled="disabled">
+
+							<div class="modal-footer">
+								<button type="button" class="btn btn-link" data-dismiss="modal">닫기</button>
+								<button type="button" class="btn bg-primary"
+									onclick="javascript:create_click();">등록</button>
 							</div>
 						</div>
 					</div>
@@ -269,11 +381,12 @@
 
 		}
 
+		console.log("save clicked");
 		console.log(tagInfo);
 
 		$.ajax({
-			type : "POST",
-			url : "/taginfo/save/",
+			type : "PUT",
+			url : "/taginfo/save",
 			dataType : "text",
 			data : JSON.stringify(tagInfo),
 			contentType : "application/json; charset=UTF-8",
@@ -289,7 +402,9 @@
 	
 	function delete_click(obj) {
 		
-		var tagInfo = obj;
+		var tagInfo = {
+			tagId : $("#tagId").val()
+		}
 		
 		console.log(tagInfo);
 		
@@ -317,12 +432,52 @@
 		}
 	};
 
-	function create_click(){
+	function open_postModal(){
 		
-		$.ajax({
-			
-		})
-	}
+		$('#postModal').modal('show');
+
+	};
+	
+	function create_click() {
+		
+		var tagInfo = {
+				 clientCd : $("#clientCdPost").val(),
+				 siteCd : $("#siteCdPost").val(),
+				 tagTypeNm : $("#tagTypeNmPost").val(),
+				 tagUnitNm : $("#tagUnitNmPost").val(),
+				 tagNm : $("#tagNmPost").val(),
+				 tagCd : $("#tagCdPost").val(),
+				 creDtm : $("#creDtmPost").val(),
+				 tagId : $("#tagIdPost").val(),
+				 creDtm : $("#creDtmPost").val(),
+				 creMn : $("#creMnPost").val(),
+				 tagType : $("#tagTypePost").val(),
+				 updDtm : $("#updDtmPost").val(),
+				 updMn : $("#updMnPost").val(),
+				 tagUnit : $("#tagUnitPost").val(),
+			}
+
+			console.log("create clicked");
+			console.log(tagInfo);
+		
+			$.ajax({
+				type : "POST",
+				url : "/taginfo/create/",
+				dataType : "text",
+				data : JSON.stringify(tagInfo),
+				contentType : "application/json; charset=UTF-8",
+				error : function(e) {
+					console.log("등록 실패");
+					console.log(e);
+				},
+				success : function(response) {
+					alert('등록 되었습니다.');
+					$('#myModal').modal('hide');
+					window.location.href = "/taginfo/";
+				}
+			});
+	};
+	
 </script>
 
 
