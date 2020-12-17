@@ -180,7 +180,7 @@
 												<input type="hidden" id="regrt">
 												<input type="hidden" id="use_yn">
 												<label>client</label>
-												<input type="text" placeholder="client" class="form-control" id="clientCd">
+												<input type="text" placeholder="client" class="form-control" id="clientCd" readOnly>
 											</div>
 
 											<div class="col-sm-6">
@@ -322,6 +322,8 @@
 						data : JSON.stringify(comp),
 						success : function(obj){
 							alert('저장되었습니다.');
+							$('#modal_default').modal('hide');
+							window.location.href = "/comp/";
 						},
 						error : function(e) {
 							console.log("전송 실패");
@@ -336,13 +338,15 @@
 						
 					}
 						$.ajax({
-							type : "POST",
+							type : "DELETE",
 							url : "/comp/delete/",
 							dataType : "text",
 							contentType: "application/json",
 							data : JSON.stringify(delId),
 							success : function(obj){
 							alert('삭제되었습니다.');
+							$('#modal_default').modal('hide');
+							window.location.href = "/comp/";
 							},
 							error : function(e) {
 							console.log("삭제 실패");

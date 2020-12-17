@@ -1,6 +1,9 @@
 package com.ziumks.iot.web;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Optional;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -24,9 +27,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.ziumks.iot.domain.CompanyInfo;
 import com.ziumks.iot.repository.CompanyRepository;
 
+import jdk.internal.org.jline.utils.Log;
+
 @Controller
 @RequestMapping("/comp")
 public class CompanyController {
+	
+	Date now = new Date();
+	
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+	
+	String date = ""+sdf.format(now);
+	
     private static final Logger logger = LogManager.getLogger(CompanyController.class);
     @Autowired
     CompanyRepository repository;
@@ -74,14 +86,19 @@ public class CompanyController {
 		return new ResponseEntity<String>("success", HttpStatus.OK);
 	}
 	@ResponseBody
-	@RequestMapping(value = "/delete", method = RequestMethod.POST)
-	public void delete(@RequestBody String coId) {
-		
-		repository.deleteByCoId(coId);
+	@RequestMapping(value = "/delete", method = RequestMethod.DELETE)
+	public ResponseEntity<String> delete(@RequestBody CompanyInfo companyInfo) {
+		repository.delete(companyInfo);
+		return new ResponseEntity<String>("success", HttpStatus.OK);
 	}
 	@ResponseBody
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public ResponseEntity<String> insert(@RequestBody CompanyInfo companyInfo) {
+		//고정
+		companyInfo.setCoId(UUID.randomUUID().toString().replace("-", ""));
+		companyInfo.setUse_yn(true);
+		companyInfo.setRegrt("User Id");
+		companyInfo.setCreDtm(date);
 		companyInfo = repository.save(companyInfo);
 		return new ResponseEntity<String>("success", HttpStatus.OK);
 	}
