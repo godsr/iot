@@ -32,28 +32,28 @@ import jdk.internal.org.jline.utils.Log;
 @Controller
 @RequestMapping("/comp")
 public class CompanyController {
-	
+
 	Date now = new Date();
-	
+
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-	
-	String date = ""+sdf.format(now);
-	
-    private static final Logger logger = LogManager.getLogger(CompanyController.class);
-    @Autowired
-    CompanyRepository repository;
-    
-    
-    @RequestMapping("/")
-    public String plist(HttpServletRequest request, Model model, @PageableDefault(sort = { "coId" }, direction = Direction.ASC, size = 5) Pageable pageable) {
-        logger.info("comp info: ");
-        Page<CompanyInfo> compinfos = repository.findAll(pageable);
-        
-        String pageTag = PagerTag.by(compinfos, request.getRequestURI());
-        
-        model.addAttribute("pagerTag", pageTag);
-        model.addAttribute("compList", compinfos.getContent());
-        return "company";
+
+	String date = "" + sdf.format(now);
+
+	private static final Logger logger = LogManager.getLogger(CompanyController.class);
+	@Autowired
+	CompanyRepository repository;
+
+	@RequestMapping("/")
+	public String plist(HttpServletRequest request, Model model,
+			@PageableDefault(sort = { "coId" }, direction = Direction.ASC, size = 5) Pageable pageable) {
+		logger.info("comp info: ");
+		Page<CompanyInfo> compinfos = repository.findAll(pageable);
+
+		String pageTag = PagerTag.by(compinfos, request.getRequestURI());
+
+		model.addAttribute("pagerTag", pageTag);
+		model.addAttribute("compList", compinfos.getContent());
+		return "company";
 	}
 
 //    	@RequestMapping("/")
@@ -64,13 +64,13 @@ public class CompanyController {
 //		model.addAttribute("compList", compList);
 //		return "company";
 //	}
-    
+
 	@RequestMapping("/index/{coId}")
 	@ResponseBody
-	public CompanyInfo read(@PathVariable("coId")String coId, Model model) {
+	public CompanyInfo read(@PathVariable("coId") String coId, Model model) {
 		Optional<CompanyInfo> company = repository.findById(coId);
 		CompanyInfo comp = null;
-		if(company.isPresent()) {
+		if (company.isPresent()) {
 			comp = company.get();
 		} else {
 			logger.info("account is null");
@@ -78,23 +78,25 @@ public class CompanyController {
 		logger.info(comp);
 		return comp;
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public ResponseEntity<String> update(@RequestBody CompanyInfo companyInfo) {
 		companyInfo = repository.save(companyInfo);
 		return new ResponseEntity<String>("success", HttpStatus.OK);
 	}
+
 	@ResponseBody
 	@RequestMapping(value = "/delete", method = RequestMethod.DELETE)
 	public ResponseEntity<String> delete(@RequestBody CompanyInfo companyInfo) {
 		repository.delete(companyInfo);
 		return new ResponseEntity<String>("success", HttpStatus.OK);
 	}
+
 	@ResponseBody
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public ResponseEntity<String> insert(@RequestBody CompanyInfo companyInfo) {
-		//고정
+		// 고정
 		companyInfo.setCoId(UUID.randomUUID().toString().replace("-", ""));
 		companyInfo.setUse_yn(true);
 		companyInfo.setRegrt("User Id");
