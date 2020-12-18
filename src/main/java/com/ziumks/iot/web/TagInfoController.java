@@ -1,9 +1,11 @@
 package com.ziumks.iot.web;
 
+import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -18,10 +20,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.common.base.Strings;
+import com.google.common.collect.Maps;
+import com.ziumks.iot.config.CommonCode;
 import com.ziumks.iot.domain.TagInfo;
 import com.ziumks.iot.repository.TagInfoRepository;
+import com.ziumks.iot.response.TagInfoResponse;
+import com.ziumks.iot.service.TagInfoService;
 
 @Controller
 @RequestMapping("/taginfo")
@@ -31,6 +39,9 @@ public class TagInfoController {
     
     @Autowired
     TagInfoRepository repository;
+    
+    @Autowired
+    TagInfoService service;
     
     @RequestMapping("/")
     public String list(HttpServletRequest request, Model model, 
@@ -87,5 +98,51 @@ public class TagInfoController {
     	return "delete success";
     }
     
-    
+    @RequestMapping(value="/search", method = {RequestMethod.GET} )
+    @ResponseBody
+    public TagInfoResponse getList(
+    		HttpServletRequest request,
+    		HttpServletResponse response,
+    		
+    		@RequestParam(value = "page", required = false, defaultValue = "1") String page,
+			@RequestParam(value = "rows", required = false, defaultValue = "10") String rows,
+			@RequestParam(value = "sortIndex", required = false, defaultValue = "ASC") String sortIndex,
+			@RequestParam(value = "sortColumn", required = false, defaultValue = "modelNm") String sortColumn,
+
+			@RequestParam(name="siteCd", required=false, defaultValue="" ) String siteCd,
+			@RequestParam(name="tagNm", required=false, defaultValue="" ) String tagNm,
+			@RequestParam(name="tagType", required=false, defaultValue="" ) String tagType,
+//    		User user,
+    		Model model){
+
+    	Map<String, Object> paramMap = Maps.newConcurrentMap();
+    	paramMap.put("page", page);
+    	paramMap.put("rows", rows);
+    	paramMap.put("sortIndex", sortIndex);
+    	paramMap.put("sortColumn", sortColumn);
+
+//		if(user != null){
+//			if(!user.getUserGrd().equals("1")){
+//				paramMap.put("clientCd", user.getClientCd());
+//			}
+//			else{
+//				paramMap.put("clientCd", clientCd);
+//			}
+//
+//			if(Strings.isNullOrEmpty(siteCd)) paramMap.put("siteCd", "all");
+//			else paramMap.put("siteCd", siteCd);
+//		}
+    	paramMap.put("siteCd", siteCd);
+    	paramMap.put("tagNm", tagNm);
+    	paramMap.put("tagType", tagType);
+//		paramMap.put("user", user);
+
+    	TagInfoResponse responseData = service.getList(paramMap);
+    	
+    	responseData.setResponseCode(CommonCode.RSC.OK.getValue());
+		responseData.setResponseMessage(CommonCode.RSC.OK.getMessage());
+    	
+        return responseData;
+    }
+
 }

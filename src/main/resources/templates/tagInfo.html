@@ -26,18 +26,27 @@
 
 			<div
 				class="card-body d-sm-flex align-items-sm-center justify-content-sm-between">
-				<div class="col-md- 10">
-					<input type="text" class="form-control" id="search"
-						placeholder="태그명을 입력하세요!">
-				
-				</div>
+				<div class="row">
+					<div class="col-4">
+						<div class="form-group">
+							<label>Label</label> <input type="text" class="form-control"
+								placeholder="col-md-4">
+						</div>
+					</div>
 
-				<div>
-					<a href="#" class="btn bg-warning-300"><i
-						class="icon-statistics mr-2"
-						onclick=""></i>검색</a>
+					<div class="col-6">
+						<div class="form-group">
+							<label>Label</label> <input type="text" class="form-control"
+								placeholder="col-md-8">
+						</div>
+					</div>
+					<div class="col-2">
+						<div class="form-group">
+							<button class="btn bg-warning-300 form-control"><i
+							class="icon-statistics mr-2" onclick=""></i>검색</button>
+						</div>
+					</div>
 				</div>
-
 			</div>
 
 
@@ -68,7 +77,7 @@
 							</thead>
 							<tbody>
 								{{#list}}
-								<tr role="row" class="odd" id={{tagId}}
+								<tr role="row" class="odd" id={{tagId}} style="cursor: pointer"
 									onclick="javascript:card_click(this);">
 									<td tabindex="0" class="sorting_1" style="">{{clientCd}}</td>
 									<td style="">{{siteCd}}</td>
@@ -105,9 +114,6 @@
 											disabled="disabled">
 									</div>
 								</div>
-							</div>
-
-							<div class="modal-body">
 								<div class="form-group row">
 									<label class="col-form-label col-lg-2">현장</label>
 									<div class="col-lg-10">
@@ -116,9 +122,6 @@
 											disabled="disabled">
 									</div>
 								</div>
-							</div>
-
-							<div class="modal-body">
 								<div class="form-group row">
 									<label class="col-form-label col-lg-2">태그 유형</label>
 									<div class="col-lg-10">
@@ -127,9 +130,6 @@
 											disabled="disabled">
 									</div>
 								</div>
-							</div>
-
-							<div class="modal-body">
 								<div class="form-group row">
 									<label class="col-form-label col-lg-2">태그 단위</label>
 									<div class="col-lg-10">
@@ -138,9 +138,6 @@
 											disabled="disabled">
 									</div>
 								</div>
-							</div>
-
-							<div class="modal-body">
 								<div class="form-group row">
 									<label class="col-form-label col-lg-2">태그 코드</label>
 									<div class="col-lg-10">
@@ -149,19 +146,14 @@
 											disabled="disabled">
 									</div>
 								</div>
-							</div>
-
-							<div class="modal-body">
 								<div class="form-group row">
 									<label class="col-form-label col-lg-2">태그명</label>
 									<div class="col-lg-10">
 										<input type="text" class="form-control"
-											placeholder="Enter your userId..." id="tagNm">
+											placeholder="Enter your userId..." id="tagNm"
+											disabled="disabled">
 									</div>
 								</div>
-							</div>
-
-							<div class="modal-body">
 								<div class="form-group row">
 									<label class="col-form-label col-lg-2">생성일자</label>
 									<div class="col-lg-10">
@@ -171,7 +163,7 @@
 									</div>
 								</div>
 							</div>
-							
+
 							<input type="hidden" class="form-control"
 											placeholder="Enter your userId..." id="tagId"
 											disabled="disabled">
@@ -199,7 +191,9 @@
 							<div class="modal-footer">
 								<button type="button" class="btn btn-link" data-dismiss="modal">닫기</button>
 								<button type="button" class="btn bg-primary"
-									onclick="javascript:save_click(this);">저장 및 변경</button>
+									onclick="javascript:rewrite_click(this);">수정</button>
+								<button type="button" class="btn bg-primary"
+									onclick="javascript:save_click();">저장</button>
 								<button type="button" class="btn bg-warning"
 									onclick="javascript:delete_click();">삭제</button>
 							</div>
@@ -223,9 +217,6 @@
 											placeholder="Enter your userId..." id="clientCdPost">
 									</div>
 								</div>
-							</div>
-
-							<div class="modal-body">
 								<div class="form-group row">
 									<label class="col-form-label col-lg-2">현장</label>
 									<div class="col-lg-10">
@@ -233,9 +224,6 @@
 											placeholder="Enter your userId..." id="siteCdPost">
 									</div>
 								</div>
-							</div>
-
-							<div class="modal-body">
 								<div class="form-group row">
 									<label class="col-form-label col-lg-2">태그 유형</label>
 									<div class="col-lg-10">
@@ -243,9 +231,6 @@
 											placeholder="Enter your userId..." id="tagTypeNmPost">
 									</div>
 								</div>
-							</div>
-
-							<div class="modal-body">
 								<div class="form-group row">
 									<label class="col-form-label col-lg-2">태그 단위</label>
 									<div class="form-group row col-lg-10">
@@ -261,9 +246,6 @@
 											class="ui-selectmenu-text">Alabama</span></span>
 									</div>
 								</div>
-							</div>
-
-							<div class="modal-body">
 								<div class="form-group row">
 									<label class="col-form-label col-lg-2">태그 코드</label>
 									<div class="col-lg-10">
@@ -271,9 +253,6 @@
 											placeholder="Enter your userId..." id="tagCdPost">
 									</div>
 								</div>
-							</div>
-
-							<div class="modal-body">
 								<div class="form-group row">
 									<label class="col-form-label col-lg-2">태그명</label>
 									<div class="col-lg-10">
@@ -334,6 +313,7 @@
 
 <script type="text/javascript">
 
+
 	function card_click(obj) {
 
 		console.log(obj);
@@ -367,6 +347,14 @@
 		});
 	};
 
+	
+	function rewrite_click(obj) {
+		
+		$('.form-control').prop("disabled", function(_, val) { return ! val; });
+		
+	};
+	
+	
 	function save_click(obj) {
 
 		var tagInfo = {
@@ -400,6 +388,7 @@
 		});
 	};
 	
+	
 	function delete_click(obj) {
 		
 		var tagInfo = {
@@ -432,11 +421,13 @@
 		}
 	};
 
+	
 	function open_postModal(){
 		
 		$('#postModal').modal('show');
 
 	};
+	
 	
 	function create_click() {
 		
@@ -454,7 +445,7 @@
 				 tagType : $("#tagTypePost").val(),
 				 updDtm : $("#updDtmPost").val(),
 				 updMn : $("#updMnPost").val(),
-				 tagUnit : $("#tagUnitPost").val(),
+				 tagUnit : $("#tagUnitPost").val()
 			}
 
 			console.log("create clicked");
@@ -477,6 +468,7 @@
 				}
 			});
 	};
+	
 	
 </script>
 
