@@ -84,7 +84,7 @@ public class TagInfoDao {
 //			}
 //        }
     	if (!Strings.isNullOrEmpty(siteCd)) {
-    		sb.append(" AND tagCd = :tagCd ");
+    		sb.append(" AND siteCd = :siteCd ");
     	}
     	if (!Strings.isNullOrEmpty(tagNm)) {
     		sb.append(" AND tagNm like :tagNm ");
@@ -116,7 +116,7 @@ public class TagInfoDao {
 //			}
 //        }
     	if (!Strings.isNullOrEmpty(siteCd)) {
-    		query.setParameter("tagCd", siteCd);
+    		query.setParameter("siteCd", siteCd);
     	}
     	if (!Strings.isNullOrEmpty(tagNm)) {
     		query.setParameter("tagNm", CommonCode.SEPERATOR.PERSENTAGE.getValue()+tagNm+CommonCode.SEPERATOR.PERSENTAGE.getValue());
@@ -185,7 +185,7 @@ public class TagInfoDao {
 //			}
 //		}
     	if (!Strings.isNullOrEmpty(siteCd)) {
-    		sb.append(" AND tagCd = :siteCd ");
+    		sb.append(" AND siteCd = :siteCd ");
     	}
     	if (!Strings.isNullOrEmpty(tagNm)) {
     		sb.append(" AND tagNm like :tagNm ");
@@ -238,7 +238,7 @@ public class TagInfoDao {
 //			}
 //		}
     	if (!Strings.isNullOrEmpty(siteCd)) {
-    		query.setParameter("tagCd", siteCd);
+    		query.setParameter("siteCd", siteCd);
     	}
     	if (!Strings.isNullOrEmpty(tagNm)) {
     		query.setParameter("tagNm", CommonCode.SEPERATOR.PERSENTAGE.getValue()+tagNm+CommonCode.SEPERATOR.PERSENTAGE.getValue());

@@ -23,30 +23,45 @@
 				<h5 class="card-title">태그 정보 관리</h5>
 
 			</div>
-
+			
 			<div
-				class="card-body d-sm-flex align-items-sm-center justify-content-sm-between">
+				class="card-body align-items-lg-center justify-content-lg-between">
+				<form action="/taginfo/search" method="post" id="searchForm">
 				<div class="row">
+					<div class="col-3">
+						<div class="form-group">
+							<label>현장</label> <input type="text" class="form-control"
+								name="siteCd" placeholder="col-md-3">
+						</div>
+					</div>
+
 					<div class="col-4">
 						<div class="form-group">
-							<label>Label</label> <input type="text" class="form-control"
-								placeholder="col-md-4">
+							<label>태그명</label> <input type="text" class="form-control"
+								name="tagNm" placeholder="col-md-4">
 						</div>
 					</div>
+					<div class="col-4">
+						<div class="form-group">
+							<label>태그유형</label> <input type="text" class="form-control"
+								name="tagType" placeholder="col-md-4">
+						</div>
+					</div>
+					
+					<input type="hidden" id="page">
+					<input type="hidden" id="rows">
+					<input type="hidden" id="sortIndex">
+					<input type="hidden" id="sortColumn">
 
-					<div class="col-6">
+					<div class="col-1">
 						<div class="form-group">
-							<label>Label</label> <input type="text" class="form-control"
-								placeholder="col-md-8">
-						</div>
-					</div>
-					<div class="col-2">
-						<div class="form-group">
-							<button class="btn bg-warning-300 form-control"><i
-							class="icon-statistics mr-2" onclick=""></i>검색</button>
+							<button class="btn bg-warning-300 form-control" form="searchForm"
+							value="submit">
+							<i class="icon-statistics mr-2"></i>검색</button>
 						</div>
 					</div>
 				</div>
+				</form>
 			</div>
 
 
@@ -418,7 +433,7 @@
 			return ;
 		} else {
 			return false;
-		}
+		};
 	};
 
 	
@@ -429,47 +444,100 @@
 	};
 	
 	
+
 	function create_click() {
+
+		var tagInfo = {
+			clientCd : $("#clientCdPost").val(),
+			siteCd : $("#siteCdPost").val(),
+			tagTypeNm : $("#tagTypeNmPost").val(),
+			tagUnitNm : $("#tagUnitNmPost").val(),
+			tagNm : $("#tagNmPost").val(),
+			tagCd : $("#tagCdPost").val(),
+			creDtm : $("#creDtmPost").val(),
+			tagId : $("#tagIdPost").val(),
+			creDtm : $("#creDtmPost").val(),
+			creMn : $("#creMnPost").val(),
+			tagType : $("#tagTypePost").val(),
+			updDtm : $("#updDtmPost").val(),
+			updMn : $("#updMnPost").val(),
+			tagUnit : $("#tagUnitPost").val()
+		};
+
+		console.log("create clicked");
+		console.log(tagInfo);
+
+		$.ajax({
+			type : "POST",
+			url : "/taginfo/create/",
+			dataType : "text",
+			data : JSON.stringify(tagInfo),
+			contentType : "application/json; charset=UTF-8",
+			error : function(e) {
+				console.log("등록 실패");
+				console.log(e);
+			},
+			success : function(response) {
+				alert('등록 되었습니다.');
+				$('#postModal').modal('hide');
+				window.location.href = "/taginfo/";
+			}
+		});
+	};
+
+/* 	function search_click() {
 		
 		var tagInfo = {
-				 clientCd : $("#clientCdPost").val(),
-				 siteCd : $("#siteCdPost").val(),
-				 tagTypeNm : $("#tagTypeNmPost").val(),
-				 tagUnitNm : $("#tagUnitNmPost").val(),
-				 tagNm : $("#tagNmPost").val(),
-				 tagCd : $("#tagCdPost").val(),
-				 creDtm : $("#creDtmPost").val(),
-				 tagId : $("#tagIdPost").val(),
-				 creDtm : $("#creDtmPost").val(),
-				 creMn : $("#creMnPost").val(),
-				 tagType : $("#tagTypePost").val(),
-				 updDtm : $("#updDtmPost").val(),
-				 updMn : $("#updMnPost").val(),
-				 tagUnit : $("#tagUnitPost").val()
-			}
-
-			console.log("create clicked");
-			console.log(tagInfo);
+				page : $("#page").val(),
+				rows : $("#rows").val(),
+				sortIndex : $("#sortIndex").val(),
+				sortColumn : $("#sortColumn").val(),
+				siteCd : $("#siteCdSearch").val(),
+				tagNm : $("#tagNmSearch").val(),
+				tagType : $("#tagTypeSearch").val(),
+		};
 		
-			$.ajax({
-				type : "POST",
-				url : "/taginfo/create/",
-				dataType : "text",
-				data : JSON.stringify(tagInfo),
-				contentType : "application/json; charset=UTF-8",
-				error : function(e) {
-					console.log("등록 실패");
-					console.log(e);
-				},
-				success : function(response) {
-					alert('등록 되었습니다.');
-					$('#postModal').modal('hide');
-					window.location.href = "/taginfo/";
-				}
-			});
-	};
+		console.log("search clicked");
+		console.log(tagInfo);
+		
+		$.ajax({
+			type : "GET",
+			url : "/taginfo/search"
+				+ "?page=" + tagInfo.page
+				+ "&rows=" + tagInfo.rows
+				+ "&sortIndex=" + tagInfo.sortIndex
+				+ "&sortColumn=" + tagInfo.sortColumn
+				+ "&siteCd=" + tagInfo.siteCd
+				+ "&tagNm=" + tagInfo.tagNm
+				+ "&tagType=" + tagInfo.tagType,
+			dataType : "json", 
+			error : function(e) {
+				console.log("전송 실패");
+				console.log(e);
+			},
+			success : function(responseData) {
+				console.log("전송 성공");
+				console.log(responseData);
+				
+				// window.location.href = "/taginfo/"
+				
+			}
+		});
+
+	}; */
 	
 	
+	var infourl = taginfo/search"
+	+ "?page=" + tagInfo.page
+	+ "&rows=" + tagInfo.rows
+	+ "&sortIndex=" + tagInfo.sortIndex
+	+ "&sortColumn=" + tagInfo.sortColumn
+	+ "&siteCd=" + tagInfo.siteCd
+	+ "&tagNm=" + tagInfo.tagNm
+	+ "&tagType=" + tagInfo.tagType,
+	
+	
+	windows.location.href = infourl;
 </script>
 
 

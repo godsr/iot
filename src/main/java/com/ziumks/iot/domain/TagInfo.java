@@ -21,7 +21,7 @@ import org.springframework.data.annotation.Persistent;
 public class TagInfo implements Serializable {
 
 	private static final long serialVersionUID = 8130882479201206991L;
-
+	
 	@Id
 	@Column(name="tag_id", length=32 )
 	private String tagId;
