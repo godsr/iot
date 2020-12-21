@@ -1,5 +1,6 @@
 package com.ziumks.iot.web;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
@@ -16,6 +17,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -98,28 +100,19 @@ public class TagInfoController {
     	return "delete success";
     }
     
-    @RequestMapping(value="/search", method = {RequestMethod.GET} )
-    @ResponseBody
-    public TagInfoResponse getList(
+    @RequestMapping(value="/search", method = {RequestMethod.POST} )
+    public String getList(
     		HttpServletRequest request,
     		HttpServletResponse response,
-    		
-    		@RequestParam(value = "page", required = false, defaultValue = "1") String page,
-			@RequestParam(value = "rows", required = false, defaultValue = "10") String rows,
-			@RequestParam(value = "sortIndex", required = false, defaultValue = "ASC") String sortIndex,
-			@RequestParam(value = "sortColumn", required = false, defaultValue = "modelNm") String sortColumn,
-
-			@RequestParam(name="siteCd", required=false, defaultValue="" ) String siteCd,
-			@RequestParam(name="tagNm", required=false, defaultValue="" ) String tagNm,
-			@RequestParam(name="tagType", required=false, defaultValue="" ) String tagType,
-//    		User user,
+			@ModelAttribute TagInfo tagInfo,
     		Model model){
 
     	Map<String, Object> paramMap = Maps.newConcurrentMap();
-    	paramMap.put("page", page);
-    	paramMap.put("rows", rows);
-    	paramMap.put("sortIndex", sortIndex);
-    	paramMap.put("sortColumn", sortColumn);
+    	paramMap.put("page", "1");
+    	paramMap.put("rows", "10");
+//    	paramMap.put("sortIndex", sortIndex);
+//    	paramMap.put("sortColumn", tagInfo);
+//    	
 
 //		if(user != null){
 //			if(!user.getUserGrd().equals("1")){
@@ -132,17 +125,19 @@ public class TagInfoController {
 //			if(Strings.isNullOrEmpty(siteCd)) paramMap.put("siteCd", "all");
 //			else paramMap.put("siteCd", siteCd);
 //		}
-    	paramMap.put("siteCd", siteCd);
-    	paramMap.put("tagNm", tagNm);
-    	paramMap.put("tagType", tagType);
+    	paramMap.put("siteCd", tagInfo.getSiteCd());
+    	paramMap.put("tagNm", tagInfo.getTagNm());
+    	paramMap.put("tagType", tagInfo.getTagType());
 //		paramMap.put("user", user);
 
     	TagInfoResponse responseData = service.getList(paramMap);
+
     	
-    	responseData.setResponseCode(CommonCode.RSC.OK.getValue());
-		responseData.setResponseMessage(CommonCode.RSC.OK.getMessage());
+    	model.addAttribute("list", responseData.getData());
     	
-        return responseData;
+    	
+		
+        return "tagInfo";
     }
 
 }
