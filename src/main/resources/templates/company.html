@@ -19,11 +19,27 @@
 		<!-- Basic card -->
 		<div class="card">
 			<div class="card-header header-elements-inline">
-				<h5 class="card-title">업체관리{{htmlzium}}</h5>
-				<div class="header-elements">
+				<h5 class="card-title text-center">업체관리{{htmlzium}}</h5>
+				<div class="header-elements d-none py-0 mb-3 mb-md-0">
+					<form action="#">
+						<div
+							class="form-group form-group-feedback form-group-feedback-right">
+							<input type="search"
+								class="form-control bg-light-alpha border-transparent wmin-md-500"
+								placeholder="Pleas for Company">
+							<div class="form-control-feedback">
+								<i class="icon-search4 font-size-sm"></i>
+
+							</div>
+						</div>
+
+					</form>
+				</div>
+				<div class="header-elements text-right">
 					<button type="submit" class="btn bg-primary" data-toggle="modal"
 						data-target="#modal_create">New</button>
 				</div>
+
 			</div>
 
 			<div class="card-body">
@@ -82,32 +98,29 @@
 					<form action="#">
 						<div class="modal-body">
 							<input type="hidden" id="coId_"> <input type="hidden"
-											id="creDtm_"> <input type="hidden" id="updDtm_">
-										<input type="hidden" id="regrt_" value="User Id"> <input
-											type="hidden" id="use_yn_" value="true">
+								id="creDtm_"> <input type="hidden" id="updDtm_">
+							<input type="hidden" id="regrt_" value="User Id"> <input
+								type="hidden" id="use_yn_" value="true">
 							<div class="form-group">
-										<div class="form-group">
-											<div class="row">
-												<div class="col-sm-6">
-													<label>client</label>
-													<select id="clientCd_"
-														class="form-control form-control-uniform">
-														<option value="option1">please for select</option>
-														<option value="ESE">ESE</option>
-														<option value="GST">외부운영사</option>
-													</select>
-												</div>
-												<div class="col-sm-6">
-													<label>site</label>
-													<select id="siteCd_"
-														class="form-control form-control-uniform">
-														<option value="option1">please for select</option>
-														<option value="499">판교(499)</option>
-														<option value="111">유성(111)</option>
-													</select>
-												</div>
-											</div>
+								<div class="form-group">
+									<div class="row">
+										<div class="col-sm-6">
+											<label>client</label> <select id="clientCd_"
+												class="form-control form-control-uniform">
+												<option value="">please for select</option>
+												<option value="ESE">ESE</option>
+											</select>
 										</div>
+										<div class="col-sm-6">
+											<label>site</label> <select id="siteCd_"
+												class="form-control form-control-uniform">
+												<option value="">please for select</option>
+												<option value="499">판교(499)</option>
+												<option value="111">유성(111)</option>
+											</select>
+										</div>
+									</div>
+								</div>
 
 								<div class="form-group">
 									<div class="row">
@@ -117,15 +130,14 @@
 										</div>
 
 										<div class="col-sm-4">
-													<label>type</label>
-													<select id="coType_"
-														class="form-control form-control-uniform">
-														<option value="option1">please for select</option>
-														<option value="001">공급 업체</option>
-														<option value="002">공급/유지보수 업체</option>
-														<option value="003">유지보수 업체</option>
-													</select>
-												</div>
+											<label>type</label> <select id="coType_"
+												class="form-control form-control-uniform">
+												<option value="">please for select</option>
+												<option value="001">공급 업체</option>
+												<option value="002">공급/유지보수 업체</option>
+												<option value="003">유지보수 업체</option>
+											</select>
+										</div>
 
 										<div class="col-sm-4">
 											<label>tel</label> <input type="text"
@@ -218,8 +230,13 @@
 									</div>
 
 									<div class="col-sm-4">
-										<label>type</label> <input type="text" placeholder="type"
-											class="form-control" id="coType">
+										<label>type</label> <select id="coType"
+											class="form-control form-control-uniform">
+											<option value="">please for select</option>
+											<option value="001">공급 업체</option>
+											<option value="002">공급/유지보수 업체</option>
+											<option value="003">유지보수 업체</option>
+										</select>
 									</div>
 
 									<div class="col-sm-4">
@@ -321,13 +338,36 @@
 		};
 
 		function save_click(obj) {
-			
-			if($("#coPhone").val()==""){
-				alert("ㄴㄴ");
+
+			if ($("#clientCd").val() == "") {
+				alert("client를 선택하여 주세요");
+				return;
+			} else if ($("#siteCd").val() == "") {
+				alert("site를 선택하여 주세요");
+				return;
+			} else if ($("#coNm").val() == "") {
+				alert("회사명을 입력하여 주세요");
+				return;
+			} else if ($("#coType").val() == "") {
+				alert("업체 속성을 선택하여 주세요");
+				return;
+			} else if ($("#coPhone").val() == "") {
+				alert("전화번호를 입력하여 주세요");
+				return;
+			} else if ($("#coAddr").val() == "") {
+				alert("주소를 입력하여 주세요");
+				return;
+			} else if ($("#coMngr").val() == "") {
+				alert("담당자 이름을 입력하여 주세요");
+				return;
+			} else if ($("#coMngrPhone").val() == "") {
+				alert("담당자 전화번호를 입력하여 주세요");
+				return;
+			} else if ($("#coMngrEmail").val() == "") {
+				alert("담당자 메일 주소를 입력하여 주세요");
 				return;
 			}
-			
-			
+
 			var comp = {
 				coId : $("#coId").val(),
 				clientCd : $("#clientCd").val(),
@@ -388,6 +428,35 @@
 		};
 
 		function new_save_click(obj) {
+
+			if ($("#clientCd_").val() == "") {
+				alert("client를 선택하여 주세요");
+				return;
+			} else if ($("#siteCd_").val() == "") {
+				alert("site를 선택하여 주세요");
+				return;
+			} else if ($("#coNm_").val() == "") {
+				alert("회사명을 입력하여 주세요");
+				return;
+			} else if ($("#coType_").val() == "") {
+				alert("업체 속성을 선택하여 주세요");
+				return;
+			} else if ($("#coPhone_").val() == "") {
+				alert("전화번호를 입력하여 주세요");
+				return;
+			} else if ($("#coAddr_").val() == "") {
+				alert("주소를 입력하여 주세요");
+				return;
+			} else if ($("#coMngr_").val() == "") {
+				alert("담당자 이름을 입력하여 주세요");
+				return;
+			} else if ($("#coMngrPhone_").val() == "") {
+				alert("담당자 전화번호를 입력하여 주세요");
+				return;
+			} else if ($("#coMngrEmail_").val() == "") {
+				alert("담당자 메일 주소를 입력하여 주세요");
+				return;
+			}
 
 			var comp = {
 				coId : $("#coId_").val(),
