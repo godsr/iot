@@ -3,23 +3,12 @@ package com.ziumks.iot.domain;
 import java.io.Serializable;
 
 import javax.persistence.Column;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.hibernate.annotations.Where;
-
-import com.ziumks.iot.config.CommonCode;
-import com.ziumks.iot.domain.view.ClientSiteView;
+import org.hibernate.annotations.Formula;
 
 
 
@@ -86,12 +75,19 @@ public class CompanyInfo  implements Serializable {
 //    @Embedded
 //    private ClientSiteView clientSiteView;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "co_gb", referencedColumnName = "cd", updatable = false, insertable = false)
-    @Where(clause = "grup_cd = '"+ CommonCode.GRUP_CD.CompanyType+"'")
-    @Embedded
-//  @Formula("(select CMCD.cdNm from IOT.CommCdInfo CMCD where CMCD.grupCd = 'IOT006' AND CMCD.cd = 'coType')")
-    private CommCdInfo companyTypeInfo;
+    
+//    @ysr    
+//	조인이나 포뮬러나 데이터를 가져오지만 포뮬러는 서브쿼리를 돌리고 조인은 별도의 쿼리를 돌린다.
+    
+    
+//    @OneToOne(fetch = FetchType.LAZY)
+//   @JoinColumn(name = "co_gb", referencedColumnName = "cd", updatable = false, insertable = false)
+//    @Where(clause = "grup_cd = '"+ CommonCode.GRUP_CD.CompanyType+"'")
+//    @Embedded
+
+    
+    @Formula("(select CMCD.cd_Nm from iot_web.Comm_Cd_Info CMCD where CMCD.grup_Cd = 'IOT006' AND CMCD.cd = co_gb)")
+    private String companyTypeInfo;
 
     public String getCoId() {
         return coId;
@@ -229,11 +225,11 @@ public class CompanyInfo  implements Serializable {
         this.use_yn = use_yn;
     }
 
-    public CommCdInfo getCompanyTypeInfo() {
+    public String getCompanyTypeInfo() {
         return companyTypeInfo;
     }
 
-    public void setCompanyTypeInfo(CommCdInfo companyTypeInfo) {
+    public void setCompanyTypeInfo(String companyTypeInfo) {
         this.companyTypeInfo = companyTypeInfo;
     }
 }

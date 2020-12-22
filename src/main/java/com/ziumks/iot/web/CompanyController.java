@@ -27,7 +27,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.ziumks.iot.domain.CompanyInfo;
 import com.ziumks.iot.repository.CompanyRepository;
 
-import jdk.internal.org.jline.utils.Log;
 
 @Controller
 @RequestMapping("/comp")
