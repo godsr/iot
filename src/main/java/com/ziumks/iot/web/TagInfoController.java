@@ -1,5 +1,6 @@
 package com.ziumks.iot.web;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -28,7 +29,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.common.base.Strings;
 import com.google.common.collect.Maps;
 import com.ziumks.iot.config.CommonCode;
+import com.ziumks.iot.domain.ClientCd;
+import com.ziumks.iot.domain.CommCdInfo;
 import com.ziumks.iot.domain.TagInfo;
+import com.ziumks.iot.domain.TagUnit;
+import com.ziumks.iot.repository.ClientCdRepository;
+import com.ziumks.iot.repository.TagUnitRepository;
 import com.ziumks.iot.repository.TagInfoRepository;
 import com.ziumks.iot.response.TagInfoResponse;
 import com.ziumks.iot.service.TagInfoService;
@@ -41,7 +47,10 @@ public class TagInfoController {
     
     @Autowired
     TagInfoRepository repository;
-    
+    @Autowired
+    ClientCdRepository clientCdRepository;
+    @Autowired
+    TagUnitRepository tagUnitRepository;
     @Autowired
     TagInfoService service;
     
@@ -62,7 +71,8 @@ public class TagInfoController {
     
     @RequestMapping("/{tagId}")
     @ResponseBody
-    public TagInfo oneInfo(@PathVariable("tagId")String tagId, Model model) {
+    public Map<String, Object> oneInfo(@PathVariable("tagId")String tagId, Model model) {
+    	
     	Optional<TagInfo> tagInfoOptional = repository.findById(tagId);
     	TagInfo tagInfo = null;
     	if (tagInfoOptional.isPresent()) {
@@ -71,7 +81,16 @@ public class TagInfoController {
 			logger.info("db에 해당 id가 없습니다.");
 		}
     	logger.info(tagInfo);
-    	return tagInfo;
+
+    	List<ClientCd> clientCds = clientCdRepository.getClientCdList();
+    	List<TagUnit> tagUnits = tagUnitRepository.getTagUnit();
+
+    	Map<String, Object> tagInfoMap = new HashMap<String, Object>();
+    	tagInfoMap.put("tagInfo", tagInfo);
+    	tagInfoMap.put("clientCds", clientCds);
+    	tagInfoMap.put("tagUnit", tagUnits);
+
+    	return tagInfoMap;
     }
     
     @ResponseBody

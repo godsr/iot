@@ -30,8 +30,12 @@
 				<div class="row">
 					<div class="col-3">
 						<div class="form-group">
-							<label>현장</label> <input type="text" class="form-control"
+							<label>현장</label> <select  id="siteCdSel" 
+								class="form-control form-control-uniform"
 								name="siteCd" placeholder="col-md-3">
+								<option>ESE </option>
+								<option>SSS </option>
+								</select>
 						</div>
 					</div>
 
@@ -43,8 +47,12 @@
 					</div>
 					<div class="col-4">
 						<div class="form-group">
-							<label>태그유형</label> <input type="text" class="form-control"
-								name="tagType" placeholder="col-md-4">
+							<label>태그유형</label><select id="tagTypeSel" 
+								class="form-control form-control-uniform"
+								name="tagType" placeholder="col-md-3">
+								<option> </option>
+								<option> </option> 
+								</select>
 						</div>
 					</div>
 					
@@ -115,93 +123,89 @@
 			<div id="myModal" class="modal fade" tabindex="-1">
 					<div class="modal-dialog">
 						<div class="modal-content">
-							<div class="modal-header">
-								<h5 class="modal-title">사용자 정보</h5>
-								<button type="button" class="close" data-dismiss="modal">&times;</button>
-							</div>
+						<div class="modal-header">
+							<h5 class="modal-title">사용자 정보</h5>
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+						</div>
 
-							<div class="modal-body">
-								<div class="form-group row">
-									<label class="col-form-label col-lg-2">운영사</label>
-									<div class="col-lg-10">
-										<input type="text" class="form-control"
-											placeholder="Enter your userId..." id="clientCd"
-											disabled="disabled">
-									</div>
-								</div>
-								<div class="form-group row">
-									<label class="col-form-label col-lg-2">현장</label>
-									<div class="col-lg-10">
-										<input type="text" class="form-control"
-											placeholder="Enter your userId..." id="siteCd"
-											disabled="disabled">
-									</div>
-								</div>
-								<div class="form-group row">
-									<label class="col-form-label col-lg-2">태그 유형</label>
-									<div class="col-lg-10">
-										<input type="text" class="form-control"
-											placeholder="Enter your userId..." id="tagTypeNm"
-											disabled="disabled">
-									</div>
-								</div>
-								<div class="form-group row">
-									<label class="col-form-label col-lg-2">태그 단위</label>
-									<div class="col-lg-10">
-										<input type="text" class="form-control"
-											placeholder="Enter your userId..." id="tagUnitNm"
-											disabled="disabled">
-									</div>
-								</div>
-								<div class="form-group row">
-									<label class="col-form-label col-lg-2">태그 코드</label>
-									<div class="col-lg-10">
-										<input type="text" class="form-control"
-											placeholder="Enter your userId..." id="tagCd"
-											disabled="disabled">
-									</div>
-								</div>
-								<div class="form-group row">
-									<label class="col-form-label col-lg-2">태그명</label>
-									<div class="col-lg-10">
-										<input type="text" class="form-control"
-											placeholder="Enter your userId..." id="tagNm"
-											disabled="disabled">
-									</div>
-								</div>
-								<div class="form-group row">
-									<label class="col-form-label col-lg-2">생성일자</label>
-									<div class="col-lg-10">
-										<input type="text" class="form-control"
-											placeholder="Enter your userId..." id="creDtm"
-											disabled="disabled">
-									</div>
+						<div class="modal-body">
+							<div class="form-group row">
+								<label class="col-form-label col-lg-2">운영사</label>
+								<div class="col-lg-10">
+									<select id="clientCd" disabled="disabled"
+										class="form-control form-control-uniform toggle-disabled">
+									</select>
 								</div>
 							</div>
+							<div class="form-group row">
+								<label class="col-form-label col-lg-2">현장</label>
+								<div class="col-lg-10">
+									<select id="siteCd" disabled="disabled"
+										class="form-control form-control-uniform toggle-disabled">
+										<option>sss</option>
+										<option>499</option>
+										<option>aaa</option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group row">
+								<label class="col-form-label col-lg-2">태그 유형</label>
+								<div class="col-lg-10">
+									<select id="tagTypeNm" disabled="disabled"
+										class="form-control form-control-uniform toggle-disabled">
+										<option>EEE</option>
+										<option>수집</option>
+										<option>ESE</option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group row">
+								<label class="col-form-label col-lg-2">태그 단위</label>
+								<div class="col-lg-10">
+									<select id="tagUnitNm" disabled="disabled"
+										class="form-control form-control-uniform toggle-disabled">
+									</select>
+								</div>
+							</div>
+							<div class="form-group row">
+								<label class="col-form-label col-lg-2">태그 코드</label>
+								<div class="col-lg-10">
+									<select id="tagCd" disabled="disabled"
+										class="form-control form-control-uniform toggle-disabled">
+										<option>EEE</option>
+										<option>ESE</option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group row">
+								<label class="col-form-label col-lg-2">태그명</label>
+								<div class="col-lg-10">
+									<input type="text" class="form-control toggle-disabled"
+										placeholder="Enter your userId..." id="tagNm"
+										disabled="disabled">
+								</div>
+							</div>
+							<div class="form-group row">
+								<label class="col-form-label col-lg-2">생성일자</label>
+								<div class="col-lg-10">
+									<input type="text" class="form-control"
+										placeholder="Enter your userId..." id="creDtm"
+										disabled="disabled">
+								</div>
+							</div>
+						</div>
 
-							<input type="hidden" class="form-control"
-											placeholder="Enter your userId..." id="tagId"
-											disabled="disabled">
+						<input type="hidden" id="tagId">
 
-							<input type="hidden" class="form-control"
-											placeholder="Enter your userId..." id="creMn"
-											disabled="disabled">
+							<input type="hidden" id="creMn">
 
-							<input type="hidden" class="form-control"
-											placeholder="Enter your userId..." id="tagType"
-											disabled="disabled">
+							<input type="hidden" id="tagType">
 
-							<input type="hidden" class="form-control"
-											placeholder="Enter your userId..." id="updDtm"
-											disabled="disabled">
+							<input type="hidden" id="updDtm">
 
-							<input type="hidden" class="form-control"
-											placeholder="Enter your userId..." id="updMn"
-											disabled="disabled">
+							<input type="hidden" id="updMn">
 
-							<input type="hidden" class="form-control"
-											placeholder="Enter your userId..." id="tagUnit"
-											disabled="disabled">
+							<input type="hidden" id="tagUnit">
 
 							<div class="modal-footer">
 								<button type="button" class="btn btn-link" data-dismiss="modal">닫기</button>
@@ -251,14 +255,6 @@
 									<div class="form-group row col-lg-10">
 										<input type="text" class="form-control"
 											placeholder="Enter your userId..." id="tagUnitNmPost">
-										<span tabindex="0" id="ui-id-9-button" role="combobox"
-											aria-expanded="true" aria-autocomplete="list"
-											aria-owns="ui-id-9-menu" aria-haspopup="true"
-											class="ui-selectmenu-button ui-button ui-widget ui-selectmenu-button-open ui-corner-top col-lg-8"
-											aria-activedescendant="ui-id-10" aria-labelledby="ui-id-14"
-											aria-disabled="false" style="width: 100%;"><span
-											class="ui-selectmenu-icon ui-icon ui-icon-triangle-1-s"></span><span
-											class="ui-selectmenu-text">Alabama</span></span>
 									</div>
 								</div>
 								<div class="form-group row">
@@ -277,33 +273,19 @@
 								</div>
 							</div>
 
-							<input type="hidden" class="form-control"
-											placeholder="Enter your userId..." id="creDtmPost"
-											disabled="disabled">
+							<input type="hidden" id="creDtmPost">
 							
-							<input type="hidden" class="form-control"
-											placeholder="Enter your userId..." id="tagIdPost"
-											disabled="disabled">
+							<input type="hidden" id="tagIdPost">
 
-							<input type="hidden" class="form-control"
-											placeholder="Enter your userId..." id="creMnPost"
-											disabled="disabled">
+							<input type="hidden" id="creMnPost">
 
-							<input type="hidden" class="form-control"
-											placeholder="Enter your userId..." id="tagTypePost"
-											disabled="disabled">
+							<input type="hidden" id="tagTypePost">
 
-							<input type="hidden" class="form-control"
-											placeholder="Enter your userId..." id="updDtmPost"
-											disabled="disabled">
+							<input type="hidden" id="updDtmPost">
 
-							<input type="hidden" class="form-control"
-											placeholder="Enter your userId..." id="updMnPost"
-											disabled="disabled">
+							<input type="hidden" id="updMnPost">
 
-							<input type="hidden" class="form-control"
-											placeholder="Enter your userId..." id="tagUnitPost"
-											disabled="disabled">
+							<input type="hidden" id="tagUnitPost">
 
 							<div class="modal-footer">
 								<button type="button" class="btn btn-link" data-dismiss="modal">닫기</button>
@@ -346,7 +328,38 @@
 
 				console.log("전송 성공");
 				console.log(obj);
+	
+				$('#clientCd').children('option').remove();
 
+				for(var i = 0; i < obj.clientCds.length; i++) {
+					$('#clientCd').append($('<option/>', 
+							{ value: obj.clientCds[i].clientCd, text : obj.clientCds[i].clientNm }));
+				}
+
+				$('#tagUnitNm').children('option').remove();
+
+				for(var i = 0; i < obj.commCdInfo_TagUnits.length; i++) {
+					$('#tagUnitNm').append($('<option/>', 
+							{ value: obj.commCdInfo_TagUnits[i].cdDesc, text : obj.commCdInfo_TagUnits[i].cdNm }));
+				}
+			
+				
+/* 				$.each(obj.clientCds, function (index, value) {
+				    $('#dropListBuilding').append($('<option/>', { 
+				        value: value,
+				        text : value 
+				    }));
+				});  	
+					
+				
+				obj.clientCds.forEach(function(item, index){
+					$('#clientCd').append($('<option/>', {
+				        value: item.clientCd,
+				        text : item.clientNm 
+					 }));
+				});
+ */
+				
 				$('#myModal').modal('show');
 
 				$('#clientCd').val(obj.clientCd);
@@ -365,7 +378,7 @@
 	
 	function rewrite_click(obj) {
 		
-		$('.form-control').prop("disabled", function(_, val) { return ! val; });
+		$('.toggle-disabled').prop("disabled", function(_, val) { return ! val; });
 		
 	};
 	
@@ -527,7 +540,7 @@
 	}; */
 	
 	
-	var infourl = taginfo/search"
+/* 	var infourl = taginfo/search"
 	+ "?page=" + tagInfo.page
 	+ "&rows=" + tagInfo.rows
 	+ "&sortIndex=" + tagInfo.sortIndex
@@ -537,7 +550,7 @@
 	+ "&tagType=" + tagInfo.tagType,
 	
 	
-	windows.location.href = infourl;
+	windows.location.href = infourl; */
 </script>
 
 
