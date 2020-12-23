@@ -28,28 +28,28 @@
 				class="card-body align-items-lg-center justify-content-lg-between">
 				<form action="/taginfo/search" method="post" id="searchForm">
 				<div class="row">
-					<div class="col-3">
+					<div class="col-md-3 col-sm-5">
 						<div class="form-group">
 							<label>현장</label> <select  id="siteCdSel" 
 								class="form-control form-control-uniform"
-								name="siteCd" placeholder="col-md-3">
+								name="siteCd" >
 								<option>ESE </option>
 								<option>SSS </option>
 								</select>
 						</div>
 					</div>
 
-					<div class="col-4">
+					<div class="col-md-4 col-sm-7">
 						<div class="form-group">
-							<label>태그명</label> <input type="text" class="form-control"
-								name="tagNm" placeholder="col-md-4">
+							<label>태그명</label> <input type="text" class="form-control form-control-uniform"
+								name="tagNm">
 						</div>
 					</div>
-					<div class="col-4">
+					<div class="col-md-4 col-sm-9">
 						<div class="form-group">
 							<label>태그유형</label><select id="tagTypeSel" 
 								class="form-control form-control-uniform"
-								name="tagType" placeholder="col-md-3">
+								name="tagType">
 								<option> </option>
 								<option> </option> 
 								</select>
@@ -61,9 +61,9 @@
 					<input type="hidden" id="sortIndex">
 					<input type="hidden" id="sortColumn">
 
-					<div class="col-1">
+					<div class="col-md-1 col-sm-3">
 						<div class="form-group">
-							<button class="btn bg-warning-300 form-control" form="searchForm"
+							<button class="btn bg-warning-300 form-control mt-3" form="searchForm"
 							value="submit">
 							<i class="icon-statistics mr-2"></i>검색</button>
 						</div>
@@ -172,8 +172,6 @@
 								<div class="col-lg-10">
 									<select id="tagCd" disabled="disabled"
 										class="form-control form-control-uniform toggle-disabled">
-										<option>EEE</option>
-										<option>ESE</option>
 									</select>
 								</div>
 							</div>
@@ -330,23 +328,27 @@
 				console.log(obj);
 	
 				$('#clientCd').children('option').remove();
-
 				for(var i = 0; i < obj.clientCds.length; i++) {
 					$('#clientCd').append($('<option/>', 
 							{ value: obj.clientCds[i].clientCd, text : obj.clientCds[i].clientNm }));
 				}
 
 				$('#tagUnitNm').children('option').remove();
-
-				for(var i = 0; i < obj.commCdInfo_TagUnits.length; i++) {
+				for(var i = 0; i < obj.tagUnits.length; i++) {
 					$('#tagUnitNm').append($('<option/>', 
-							{ value: obj.commCdInfo_TagUnits[i].cdDesc, text : obj.commCdInfo_TagUnits[i].cdNm }));
+							{ value: obj.tagUnits[i].cdNm, text : obj.tagUnits[i].cdNm }));
 				}
+
+				/* $('#tagCd').children('option').remove();
+				for(var i = 0; i < obj.tagUnits.length; i++) {
+					$('#tagCd').append($('<option/>', 
+							{ value: obj.tagUnits[i].cdNm, text : obj.tagUnits[i].cdNm }));
+				} */
 			
 				
 /* 				$.each(obj.clientCds, function (index, value) {
 				    $('#dropListBuilding').append($('<option/>', { 
-				        value: value,
+				        value: value,[
 				        text : value 
 				    }));
 				});  	
@@ -362,14 +364,14 @@
 				
 				$('#myModal').modal('show');
 
-				$('#clientCd').val(obj.clientCd);
-				$('#siteCd').val(obj.siteCd);
-				$('#tagTypeNm').val(obj.tagTypeNm);
-				$('#tagUnitNm').val(obj.tagUnitNm);
-				$('#tagNm').val(obj.tagNm);
-				$('#tagCd').val(obj.tagCd);
-				$('#creDtm').val(obj.creDtm);
-				$('#tagId').val(obj.tagId);
+				$('#clientCd').val(obj.tagInfo.clientCd);
+				$('#siteCd').val(obj.tagInfo.siteCd);
+				$('#tagTypeNm').val(obj.tagInfo.tagTypeNm);
+				$('#tagUnitNm').val(obj.tagInfo.tagUnitNm);
+				$('#tagNm').val(obj.tagInfo.tagNm);
+				$('#tagCd').val(obj.tagInfo.tagCd);
+				$('#creDtm').val(obj.tagInfo.creDtm);
+				$('#tagId').val(obj.tagInfo.tagId);
 			
 			}
 		});
@@ -474,7 +476,7 @@
 			tagType : $("#tagTypePost").val(),
 			updDtm : $("#updDtmPost").val(),
 			updMn : $("#updMnPost").val(),
-			tagUnit : $("#tagUnitPost").val()
+			tagUnitNm : $("#tagUnitPost").val()
 		};
 
 		console.log("create clicked");

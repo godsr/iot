@@ -18,9 +18,10 @@ public interface TagInfoRepository extends JpaRepository<TagInfo, String>{
 	@Query(nativeQuery = true, 
 			value = "update iot_web.tag_info set client_cd=:#{#paramTagInfo.clientCd}, "
 					+ "site_cd=:#{#paramTagInfo.siteCd}, "
-					+ "tag_unit_nm=:#{#paramTagInfo.tagUnitNm}, "
+					+ "tag_unit_nm=:#{#paramTagInfo.tagUnit}, "
 					+ "tag_cd=:#{#paramTagInfo.tagCd}, "
 					+ "tag_nm=:#{#paramTagInfo.tagNm}, "
+					+ "tag_type_nm=:#{#paramTagInfo.tagTypeNm}, "
 					+ "cre_dtm=:#{#paramTagInfo.creDtm} "
 					+ "where tag_id=:#{#paramTagInfo.tagId}")
 	int tagInfoUpdate (@Param("paramTagInfo") TagInfo tagInfo);

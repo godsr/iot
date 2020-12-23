@@ -54,7 +54,7 @@ public class TagInfoController {
     @Autowired
     TagInfoService service;
     
-    @RequestMapping("/")
+    @RequestMapping("")
     public String list(HttpServletRequest request, Model model, 
     		@PageableDefault(sort = { "creDtm" }, direction = Direction.DESC, size = 5) Pageable pageable) {
     	
@@ -88,7 +88,7 @@ public class TagInfoController {
     	Map<String, Object> tagInfoMap = new HashMap<String, Object>();
     	tagInfoMap.put("tagInfo", tagInfo);
     	tagInfoMap.put("clientCds", clientCds);
-    	tagInfoMap.put("tagUnit", tagUnits);
+    	tagInfoMap.put("tagUnits", tagUnits);
 
     	return tagInfoMap;
     }
