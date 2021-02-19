@@ -1,27 +1,18 @@
 package com.ziumks.iot.dao;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.LogManager;
 
-import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
-import javax.transaction.Transactional;
 
-import com.google.gson.JsonObject;
-import com.ziumks.iot.config.CommonCode;
-import com.ziumks.iot.config.exception.IoTException;
-import com.ziumks.iot.domain.TagInfo;
-
-import org.slf4j.Logger;
 import org.springframework.stereotype.Repository;
 
-
 import com.google.common.base.Strings;
+import com.ziumks.iot.config.CommonCode;
+import com.ziumks.iot.domain.TagInfo;
 
 @Repository(value = "TagInfoDao")
 public class TagInfoDao {
